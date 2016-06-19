@@ -4,3 +4,11 @@ export const ClickAction = (id = -1) => {
         id
     }
 }
+
+// TODO use LoadAction
+export const LoadAction = (data = {}) => {
+  return {
+      type: 'LOAD',
+      data
+  }  
+};

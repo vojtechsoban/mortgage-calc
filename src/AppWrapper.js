@@ -5,13 +5,16 @@ import { Provider } from 'react-redux';
 import App from './App';
 import reducer from './reducers';
 
+// properties must match reducer names
 const initialState = {
     clickReducer: {
         name: 'My Name',
         click1: 0,
         click2: 0
     },
-    anotherReducer: {
+    loadReducer: {
+        firstName: 'Default first',
+        lastName: 'Default last'
     }
 }
 
