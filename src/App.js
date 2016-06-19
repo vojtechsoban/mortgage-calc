@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Layout from './Layout';
 import Button from './components/Button';
-import { createStore } from 'redux'
-import counter from './reducers/index'
+import StateContainer from './containers/StateContainer';
+import ButtonContainer from './containers/ButtonContainer'
 
 // If you use React Router, make this component
 // render <Router> with your routes. Currently,
@@ -11,17 +11,16 @@ import counter from './reducers/index'
 // You can ignore this warning. For details, see:
 // https://github.com/reactjs/react-router/issues/2182
 
-// FIXME this is just POC, use bindActionCreator later
-const store = createStore(counter);
-
 export default class App extends Component {
-  render() {
-    return (
-      <Layout>
-        <Button text="some button" onClick={() => store.dispatch({type: 'click1'})} />
-    	{" "}
-        <Button text="other button" onClick={() => store.dispatch({type: 'click2'})}  />
-      </Layout>
-    );
-  }
+    render() {
+        return (
+            <Layout>
+                <StateContainer />
+                <br />
+                <Button text="dummy button with vanilla onClick" onClick={() => console.log('vanilla onClick')} />
+                {" "}
+                <ButtonContainer text="other button"/>
+            </Layout>
+        );
+    }
 }
