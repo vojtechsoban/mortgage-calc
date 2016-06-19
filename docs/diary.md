@@ -4,7 +4,9 @@ Denicek
 2016-06-12
 -
 
-vim set backupcopy=yes
+I was very confused why hot module replacement works perfectly on one machine and does not work on the other machine.
+The problem was in the editor. While I'm using Idea I was doing some smoke tests with vim. It needs to be configured:
+`set backupcopy=yes` so I put this config to `/etc/vim/vimrc`
 
 
 2016-06-14
@@ -19,3 +21,11 @@ vim set backupcopy=yes
 * some basic functionality: logging clicked on a button by redux
 * added some test boilerplate - not working yet
 
+2016-06-16
+----------
+
+* hot module replacement stopped working, I've found the solution using _react-hmre_ on site
+[Using Webpack's Hot Module Replacement with React](http://matthewlehner.net/react-hot-module-replacement-with-webpack)
+* nice example how it would look without ES6:  [React - redux without ES6](http://blog.krawaller.se/posts/a-react-redux-example-app)
+* created initial state object instead of passing the state as default argument.
+* added jsx support to webpack - it does not resolve this type of extension by default
