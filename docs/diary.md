@@ -29,3 +29,4 @@ The problem was in the editor. While I'm using Idea I was doing some smoke tests
 * nice example how it would look without ES6:  [React - redux without ES6](http://blog.krawaller.se/posts/a-react-redux-example-app)
 * created initial state object instead of passing the state as default argument.
 * added jsx support to webpack - it does not resolve this type of extension by default
+* added some basic (messy - WIP) form processing using redux-form
