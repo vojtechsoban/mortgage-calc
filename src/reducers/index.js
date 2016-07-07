@@ -5,7 +5,7 @@ import {reducer as formReducer} from 'redux-form';
 // Even if we use initial state in createStore we need to use default argument and assing null
 const clickReducer = (state = null, action) => {
 
-    console.log(`click reducer=${state}, action.type=${action.type}`);
+    // console.log(`clickReducer(state=${state}, action.type=${action.type})`);
 
     switch (action.type) {
         case 'CLICK':

@@ -4,7 +4,9 @@
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
     "start": "node server.js",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "mocha --compilers js:babel-register --recursive",
+    "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -32,8 +34,11 @@
     "babel-preset-react": "^6.0.15",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.0.15",
+    "babel-register": "^6.9.0",
+    "chai": "^3.5.0",
     "eslint": "^1.10.3",
     "eslint-plugin-react": "^3.6.2",
+    "mocha": "^2.5.3",
     "react-hot-loader": "^3.0.0-beta.1",
     "webpack": "^1.12.2",
     "webpack-dev-server": "^1.12.1"

@@ -30,3 +30,8 @@ The problem was in the editor. While I'm using Idea I was doing some smoke tests
 * created initial state object instead of passing the state as default argument.
 * added jsx support to webpack - it does not resolve this type of extension by default
 * added some basic (messy - WIP) form processing using redux-form
+
+2016-07-07
+----------
+
+* added unit test support (Mocha + Chai) and some very stupid test
