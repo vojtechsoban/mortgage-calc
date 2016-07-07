@@ -1,22 +1,19 @@
-import expect from 'expect'
-import counter from '../../reducers'
+import {assert, expect} from 'chai'
+import rootReducer from '../../src/reducers'
 
 describe('reducers', () => {
-  describe('counter', () => {
-    it('should provide the initial state', () => {
-      expect(counter(undefined, {})).toBe(0)
-    })
+    describe('clickReducer', () => {
+        it('should increase click count by one', () => {
+            const initialClickCount = 5;
+            const initialState = {
+                clickReducer: {
+                    click1: initialClickCount
+                }
+            }
 
-    it('should handle INCREMENT action', () => {
-      expect(counter(1, { type: 'INCREMENT' })).toBe(2)
+            const action = {type: 'CLICK'};
+            const nextAction = rootReducer(initialState, action);
+            expect(nextAction.clickReducer.click1).to.equal(initialClickCount + 1);
+        })
     })
-
-    it('should handle DECREMENT action', () => {
-      expect(counter(1, { type: 'DECREMENT' })).toBe(0)
-    })
-
-    it('should ignore unknown actions', () => {
-      expect(counter(1, { type: 'unknown' })).toBe(1)
-    })
-  })
 })
