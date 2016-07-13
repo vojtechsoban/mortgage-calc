@@ -24,7 +24,6 @@ const calculateMortgageReducer = (state = null, action) => {
         case 'CALCULATE_MORTGAGE':
             const result = Object.assign({}, state);
             result.mortgage = calculate(new Mortgage(action.formData.principal, action.formData.rate/100, action.formData.monthlyPayment));
-            console.log('CALCULATE_MORTGAGE got result  result.mortgage: ', result.mortgage);
             return result;
         default:
             return state;
