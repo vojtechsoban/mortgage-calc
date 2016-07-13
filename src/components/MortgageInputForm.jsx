@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-
+import React, { Component, PropTypes } from 'react';
+import { filterProps } from '../services/Utils';
 export const fields = [ 'principal', 'rate', 'monthlyPayment' ];
 
 export class MortgageInputForm extends Component {
@@ -13,19 +13,19 @@ export class MortgageInputForm extends Component {
                 <div>
                     <label>Principal</label>
                     <div>
-                        <input type="text" placeholder="Principal" {...principal} />
+                        <input type="text" placeholder="Principal" {...filterProps(principal)} />
                     </div>
                 </div>
                 <div>
                     <label>Rate</label>
                     <div>
-                        <input type="text" placeholder="Rate" {...rate} />
+                        <input type="text" placeholder="Rate" {...filterProps(rate)} />
                     </div>
                 </div>
                 <div>
                     <label>Monthly payment</label>
                     <div>
-                        <input type="text" placeholder="Monthly payment" {...monthlyPayment}/>
+                        <input type="text" placeholder="Monthly payment" {...filterProps(monthlyPayment)}/>
                     </div>
                 </div>
                 <div>
