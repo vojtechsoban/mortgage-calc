@@ -1,6 +1,6 @@
 import {reduxForm} from 'redux-form'
 import {MortgageInputForm, fields} from '../components/MortgageInputForm'
-import {CalculateMortgageAction} from '../actions/ClickActions'
+import {CalculateMortgageAction} from '../actions/Actions'
 
 const mapStateToProps = (state) => {
     return {

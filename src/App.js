@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import Layout from './Layout';
-import Button from './components/Button';
-import ButtonContainer from './containers/ButtonContainer';
 import MortgageInputFormContainer from './containers/MortgageInputFormContainer';
 import MortgageResultFormContainer from './containers/MortgageResultContainer';
 
@@ -16,13 +14,8 @@ export default class App extends Component {
     render() {
         return (
             <Layout>
-                <MortgageResultFormContainer />
-                <br />
                 <MortgageInputFormContainer  />
-                <br />
-                <Button text="dummy button with vanilla onClick" onClick={() => console.log('vanilla onClick')}/>
-                {" "}
-                <ButtonContainer text="other button"/>
+                <MortgageResultFormContainer />
             </Layout>
         );
     }
