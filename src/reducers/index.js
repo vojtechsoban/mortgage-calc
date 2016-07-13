@@ -1,11 +1,12 @@
 import {combineReducers} from 'redux'
 import {reducer as formReducer} from 'redux-form';
 
+import { calculate } from '../services/MortgageCalc';
+import Mortgage from '../models/Mortgage';
+
 // The reducer is called during some initialization before the initial state is assigned.
 // Even if we use initial state in createStore we need to use default argument and assing null
 const clickReducer = (state = null, action) => {
-
-    // console.log(`clickReducer(state=${state}, action.type=${action.type})`);
 
     switch (action.type) {
         case 'CLICK':
@@ -18,19 +19,18 @@ const clickReducer = (state = null, action) => {
     return state;
 };
 
-// redux-form assets ...
-const loadReducer = (state = null, action) => {
+const calculateMortgageReducer = (state = null, action) => {
     switch (action.type) {
-        case 'LOAD':
+        case 'CALCULATE_MORTGAGE':
             const result = Object.assign({}, state);
-            state.user.firstName = 'loaded first name';
-            state.user.lastName = 'loaded last name';
+            result.mortgage = calculate(new Mortgage(action.formData.principal, action.formData.rate/100, action.formData.monthlyPayment));
+            console.log('CALCULATE_MORTGAGE got result  result.mortgage: ', result.mortgage);
             return result;
         default:
             return state;
     }
 };
 
-const rootReducer = combineReducers({clickReducer, loadReducer, form: formReducer});
+const rootReducer = combineReducers({clickReducer, calculateMortgageReducer, form: formReducer});
 
 export default rootReducer

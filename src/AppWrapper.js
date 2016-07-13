@@ -12,9 +12,12 @@ const initialState = {
         click1: 0,
         click2: 0
     },
-    loadReducer: {
-        firstName: 'Default first',
-        lastName: 'Default last'
+    calculateMortgageReducer: {
+        mortgage: {
+            principal: null,
+            rate: null,
+            monthlyPayment: null
+        }
     }
 }
 
