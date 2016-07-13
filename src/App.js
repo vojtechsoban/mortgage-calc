@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import Layout from './Layout';
 import Button from './components/Button';
-import StateContainer from './containers/StateContainer';
-import ButtonContainer from './containers/ButtonContainer'
-import SimleFormContainer from './containers/SimpleFormContainer'
+import ButtonContainer from './containers/ButtonContainer';
+import MortgageInputFormContainer from './containers/MortgageInputFormContainer';
+import MortgageResultFormContainer from './containers/MortgageResultContainer';
 
 // If you use React Router, make this component
 // render <Router> with your routes. Currently,
@@ -16,12 +16,11 @@ export default class App extends Component {
     render() {
         return (
             <Layout>
-                <StateContainer />
+                <MortgageResultFormContainer />
                 <br />
-                {/* TODO bind submit to some action */}
-                <SimleFormContainer onSubmit={(data, dispatch) => console.log(`submit form: data.firstName=${data.firstName}`)} />
+                <MortgageInputFormContainer  />
                 <br />
-                <Button text="dummy button with vanilla onClick" onClick={() => console.log('vanilla onClick')} />
+                <Button text="dummy button with vanilla onClick" onClick={() => console.log('vanilla onClick')}/>
                 {" "}
                 <ButtonContainer text="other button"/>
             </Layout>

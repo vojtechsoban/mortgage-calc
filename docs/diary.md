@@ -35,3 +35,17 @@ The problem was in the editor. While I'm using Idea I was doing some smoke tests
 ----------
 
 * added unit test support (Mocha + Chai) and some very stupid test
+
+2016-07-12
+----------
+
+* created mortgage calculatin and tests
+* removed POC tests
+
+2016-07-13
+----------
+
+* created basic mortgage components and bound to mortgage calculation
+* removed POC components
+* found redux-form [issue](https://github.com/erikras/redux-form/issues/1249) with React [Unknown Prop Warning](https://facebook.github.io/react/warnings/unknown-prop.html), upgraded redux-form to 5.3.1
+
