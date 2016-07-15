@@ -64,3 +64,16 @@ export const calculate = (mortgageIn) => {
 
     return mortgage;
 };
+
+/**
+ * Calculate monthly installment value based on principal, rate and mortgage length (installments count)
+ * @param {number} principal
+ * @param {number} rate
+ * @param {number} installmentCount
+ * @returns {number}
+ */
+export const monthlyInstallment = (principal, rate, installmentCount) => {
+    const q = 1 + rate / 12;
+    return principal * Math.pow(q, installmentCount) * (q - 1) / (Math.pow(q, installmentCount) - 1);
+};
+

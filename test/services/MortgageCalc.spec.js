@@ -1,7 +1,7 @@
 import { assert, expect, should } from 'chai'
 import { describe } from 'mocha';
 
-import { monthlyPayment, calculate } from '../../src/services/MortgageCalc';
+import { monthlyPayment, calculate, monthlyInstallment } from '../../src/services/MortgageCalc';
 import { Mortgage } from '../../src/models/Mortgage';
 import { MONTHS_IN_YEAR } from '../../src/constants/Constants';
 
@@ -35,6 +35,12 @@ describe('MortgageCacl', () => {
 
             expect(installmentPart).to.be.closeTo(expectedInstallmentPart, 0.002);
             expect(principalPart).to.be.closeTo(principal, 0.001);
+        })
+    });
+
+    describe('Monthly installment', () => {
+        it('Basic calculation', () => {
+            expect(monthlyInstallment(200000, 0.15, 60)).to.be.closeTo(4758, 0.1);
         })
     });
 
