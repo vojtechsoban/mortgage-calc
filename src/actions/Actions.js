@@ -1,6 +1,8 @@
+import * as actionTypes from '../../src/constants/ActionTypes';
+
 export const CalculateMortgageAction = (formData = {}) => {
     return {
-        type: 'CALCULATE_MORTGAGE',
+        type: actionTypes.CALCULATE_MORTGAGE,
         formData
     }
 };
