@@ -49,3 +49,9 @@ The problem was in the editor. While I'm using Idea I was doing some smoke tests
 * removed POC components
 * found redux-form [issue](https://github.com/erikras/redux-form/issues/1249) with React [Unknown Prop Warning](https://facebook.github.io/react/warnings/unknown-prop.html), upgraded redux-form to 5.3.1
 
+2016-07-15
+----------
+* created ActionTypes constants and refactored related code
+* removed some orphaned "hello world" code
+* moved CalculateMortgageReducer to the separated file
+* created tests for CalculateMortgageReducer and Actions
