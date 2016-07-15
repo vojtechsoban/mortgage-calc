@@ -28,15 +28,14 @@ export const calculate = (mortgageIn) => {
     const _monthlyPayment = monthlyPayment;
 
     let count = 0;
+    let principal = mortgageIn.principal;
 
-    while (mortgage.principal > 0 && ++count <= 1000) {
-        const {installmentPart, principalPart} = _monthlyPayment(mortgage.principal, mortgage.rate, mortgageIn.payment);
+    while (principal > 0 && ++count <= 1000) {
+        const {installmentPart, principalPart} = _monthlyPayment(principal, mortgage.rate, mortgageIn.payment);
 
-        mortgage.principal -= principalPart;
+        principal -= principalPart;
         mortgage.installmentSum += installmentPart;
         mortgage.installmentCount++;
-
-        // console.log(`mortgage.principal=${mortgage.principal}, principalPart=${principalPart}, count=${count}`);
     }
 
     return mortgage;
