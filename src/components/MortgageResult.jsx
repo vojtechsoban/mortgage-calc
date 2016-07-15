@@ -7,7 +7,7 @@ export default class MortgageResult extends Component {
             return null;
         }
 
-        const {installmentCount, installmentSum} = this.props.mortgage;
+        const {installmentCount, installmentSum, installments} = this.props.mortgage;
 
         return (
             <div>
@@ -21,6 +21,16 @@ export default class MortgageResult extends Component {
                         <td>Installment sum</td>
                         <td>{installmentSum.toFixed(0)}</td>
                     </tr>
+                    </tbody>
+                </table>
+
+                <table>
+                    <tbody>
+                    {installments.map((item, id) => {
+                        return (
+                            <tr key={id}><td>{item.count}</td><td>{item.payment}</td><td>{item.principalPart.toFixed(0)}</td><td>{item.installmentPart.toFixed(0)}</td></tr>
+                        );
+                    })}
                     </tbody>
                 </table>
             </div>
