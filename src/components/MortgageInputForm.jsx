@@ -41,5 +41,5 @@ export class MortgageInputForm extends Component {
 MortgageInputForm.propTypes = {
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired
-}
+};
 
