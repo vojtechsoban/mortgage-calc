@@ -2,7 +2,7 @@ import { assert, expect, should } from 'chai'
 import { describe } from 'mocha';
 
 import { monthlyPayment, calculate } from '../../src/services/MortgageCalc';
-import Mortgage from '../../src/models/Mortgage';
+import { Mortgage } from '../../src/models/Mortgage';
 import { MONTHS_IN_YEAR } from '../../src/constants/Constants';
 
 describe('MortgageCacl', () => {

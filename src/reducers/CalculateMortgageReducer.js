@@ -1,5 +1,5 @@
 import { calculate } from '../services/MortgageCalc';
-import Mortgage from '../models/Mortgage';
+import { Mortgage } from '../models/Mortgage';
 import * as actionTypes from '../constants/ActionTypes';
 
 // The reducer is called during some initialization before the initial state is assigned.

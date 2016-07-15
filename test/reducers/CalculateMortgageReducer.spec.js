@@ -15,17 +15,33 @@ describe('MortgageCalc reducer', () => {
         expect(calc(undefined, {type: 'init'})).to.be.null;
         // TODO share initialState between tests and app
         const initialState = {mortgage: null};
-        const formData = {principal: 100000, rate: 1.5, monthlyPayment: 1000};
+        const formData = {principal: 10000, rate: 1.5, monthlyPayment: 6000};
         const expected = {
             mortgage: {
-                installmentCount: 107,
-                installmentSum: 6891.926123325957,
-                payment: 1000,
-                principal: 100000,
-                rate: 0.015
+                installmentCount: 2,
+                installmentSum: 17.515625,
+                payment: 6000,
+                principal: 10000,
+                rate: 0.015,
+                installments: [
+                    {
+                        count: 1,
+                        type: 'regular',
+                        installmentPart: 12.5,
+                        principalPart: 5987.5,
+                        payment: formData.monthlyPayment
+                    },
+                    {
+                        count: 2,
+                        type: 'regular',
+                        installmentPart: 5.015625,
+                        principalPart: 4012.5,
+                        payment: formData.monthlyPayment
+                    }
+                ]
             }
         };
-        
+
         expect(calc(initialState, CalculateMortgageAction(formData))).to.deep.equal(expected);
     });
 });

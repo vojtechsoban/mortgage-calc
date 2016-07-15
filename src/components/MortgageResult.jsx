@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
+import installmentDetails from './InstallmentDetails';
 
 export default class MortgageResult extends Component {
-    render() {
 
+    render() {
         if (!this.props.mortgage) {
             return null;
         }
 
-        const {installmentCount, installmentSum} = this.props.mortgage;
+        const {installmentCount, installmentSum, installments} = this.props.mortgage;
 
         return (
             <div>
@@ -23,6 +24,9 @@ export default class MortgageResult extends Component {
                     </tr>
                     </tbody>
                 </table>
+
+                {installmentDetails(installments)}
+
             </div>
         )
     }
