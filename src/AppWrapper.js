@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import App from './App';
 import reducer from './reducers';
 
-// properties must match reducer names
+// properties must match reducer names - see reducers/index.js
 const initialState = {
     calculateMortgageReducer: {
         mortgage: null
