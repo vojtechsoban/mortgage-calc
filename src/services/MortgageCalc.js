@@ -102,7 +102,7 @@ export const monthlyInstallment = (principal, rate, installmentCount) => {
 };
 
 /**
- * 
+ *
  * @param {number} principal
  * @param {number} monthlyPayment
  * @param {number} rate in float not in %, i.e 0.0125 for 12.5%

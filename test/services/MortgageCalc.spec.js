@@ -22,26 +22,29 @@ describe('MortgageCalc', () => {
         it('should return specific parameter set for particular payment', () => {
             const parameters = [parameters1, parameters2, parameters3];
             const mortgage = new Mortgage(1000000, parameters);
+
             // 1st period 36 payments: 0 - 35
             expect(getMortgageParameters(mortgage, 0)).to.deep.equal(parameters1);
             expect(getMortgageParameters(mortgage, 15)).to.deep.equal(parameters1);
             expect(getMortgageParameters(mortgage, 35)).to.deep.equal(parameters1);
+
             // 2nd period 60 payments: 36 - 95
             expect(getMortgageParameters(mortgage, 36)).to.deep.equal(parameters2);
             expect(getMortgageParameters(mortgage, 55)).to.deep.equal(parameters2);
             expect(getMortgageParameters(mortgage, 95)).to.deep.equal(parameters2);
+
             // 3d period 24 payments: 96 - 119
             expect(getMortgageParameters(mortgage, 96)).to.deep.equal(parameters3);
             expect(getMortgageParameters(mortgage, 105)).to.deep.equal(parameters3);
             expect(getMortgageParameters(mortgage, 119)).to.deep.equal(parameters3);
-            // rest periods
 
+            // rest periods
             expect(getMortgageParameters(mortgage, 200)).to.deep.equal(parameters3);
         });
     });
 
     describe('Monthly payment calculation', () => {
-        it('Calculate monthly payment without payment', () => {
+        it('Calculate monthly payment without payment - testing installment only, should also handle undefined payment', () => {
             const principal = 1000000;
             const rate = 0.023;
             const expected = principal / MONTHS_IN_YEAR * rate;

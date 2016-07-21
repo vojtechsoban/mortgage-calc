@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import Layout from './Layout';
 import MortgageInputFormContainer from './containers/MortgageInputFormContainer';
+import ExtraPaymentInputFormContainer from './containers/ExtraPaymentInputFormContainer';
+import ExtraPaymentsContainer from './containers/ExtraPaymentsContainer';
 import MortgageResultFormContainer from './containers/MortgageResultContainer';
 
 // If you use React Router, make this component
@@ -15,6 +17,8 @@ export default class App extends Component {
         return (
             <Layout>
                 <MortgageInputFormContainer  />
+                <ExtraPaymentInputFormContainer />
+                <ExtraPaymentsContainer />
                 <MortgageResultFormContainer />
             </Layout>
         );
