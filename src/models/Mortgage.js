@@ -1,11 +1,35 @@
+import assert from 'assert';
+import 'dash-assert';
+
 export class Mortgage {
-    
-    constructor (principal, rate, payment) {
+
+    /**
+     *
+     * @param {number} principal
+     * @param {MortgageParameters} parameters
+     */
+    constructor (principal, parameters) {
+        assert.isNotNull(principal);
         this.principal = principal;
-        this.rate = rate;
-        this.payment = payment;
+        assert.isNotNull(parameters);
+        this.parameters = parameters;
         this.installmentSum = 0;
         this.installmentCount = 0;
+    }
+}
+
+export class MortgageParameters {
+
+    /**
+     *
+     * @param payments number of payments for which this parameters are valid --> fixation period
+     * @param rate installment rate
+     * @param payment monthly payment
+     */
+    constructor(payments, rate, payment) {
+        this.payments = payments;
+        this.rate = rate;
+        this.payment = payment;
     }
 }
 

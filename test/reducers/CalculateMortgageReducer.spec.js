@@ -2,7 +2,7 @@ import {assert, expect} from 'chai'
 import calc from '../../src/reducers/CalculateMortgageReducer';
 import {CalculateMortgageAction} from '../../src/actions/Actions';
 
-describe('MortgageCalc reducer', () => {
+describe('MortgageCalcReducer', () => {
     it('should handle undefined state', () => {
         expect(calc(undefined, {type: 'init'})).to.be.null;
     });
@@ -20,9 +20,14 @@ describe('MortgageCalc reducer', () => {
             mortgage: {
                 installmentCount: 2,
                 installmentSum: 17.515625,
-                payment: 6000,
                 principal: 10000,
-                rate: 0.015,
+                parameters: [
+                    {
+                        payment: 6000,
+                        payments: 0,
+                        rate: 0.015
+                    }
+                ],
                 installments: [
                     {
                         count: 1,

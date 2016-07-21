@@ -1,3 +1,5 @@
+import assert from 'assert';
+
 import { MONTHS_IN_YEAR } from '../constants/Constants';
 import { InstallmentSum } from '../models/Mortgage';
 
@@ -19,6 +21,12 @@ export const monthlyPayment = (principal, rate, payment = null) => {
     }
 };
 
+export const getMortgageParameters = (mortgage, paymentIndex) => {
+  // FIXME return parameters based on index and payment count
+    assert.isNotEmpty(mortgage.parameters);
+    return mortgage.parameters[0];
+};
+
 /**
  *
  * @param {Mortgage} mortgageIn
@@ -31,26 +39,26 @@ export const calculate = (mortgageIn) => {
     const _monthlyPayment = monthlyPayment;
 
     let count = 0;
-    let principal = mortgageIn.principal;
+    let balance = mortgageIn.principal;
     let annualInstalment = new InstallmentSum();
 
-    while (principal > 0 && ++count <= 1000) {
+    while (balance > 0 && ++count <= 1000) {
 
-        const {installmentPart, principalPart} = _monthlyPayment(principal, mortgage.rate, mortgageIn.payment);
+        const { rate, payment } = getMortgageParameters(mortgageIn, count);
+        const {installmentPart, principalPart} = _monthlyPayment(balance, rate, payment);
 
-        principal -= principalPart;
+        balance -= principalPart;
         mortgage.installmentSum += installmentPart;
         mortgage.installmentCount++;
 
         annualInstalment.add(principalPart, installmentPart);
-
 
         mortgage.installments.push({
             type: 'regular',
             principalPart,
             count,
             installmentPart,
-            payment: mortgageIn.payment});
+            payment: payment});
 
         if (count % 12 === 0) {
             mortgage.installments.push({

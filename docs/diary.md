@@ -55,3 +55,8 @@ The problem was in the editor. While I'm using Idea I was doing some smoke tests
 * removed some orphaned "hello world" code
 * moved CalculateMortgageReducer to the separated file
 * created tests for CalculateMortgageReducer and Actions
+
+2016-07-17
+----------
+* refactored Mortgage model to support variable parameters during mortgage
+* added dash-assert dependency
