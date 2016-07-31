@@ -22,9 +22,25 @@ export const monthlyPayment = (principal, rate, payment = null) => {
 };
 
 export const getMortgageParameters = (mortgage, paymentIndex) => {
-  // FIXME return parameters based on index and payment count
+
     assert.isNotEmpty(mortgage.parameters);
-    return mortgage.parameters[0];
+
+    // when we calculate mortgage with constant parameters
+    if (mortgage.parameters.length === 1) {
+        return mortgage.parameters[0];
+    }  else { // calculate mortgage with variable parameters
+        let paymentSum = 0;
+        for (let parameters of mortgage.parameters) {
+            paymentSum += parameters.payments;
+            if (paymentSum > paymentIndex) {
+                return parameters;
+            }
+        }
+
+        // fallback - return the last parameters if there are no more parameters
+        // to calculate mortgage with the last used parameters.
+        return mortgage.parameters[mortgage.parameters.length - 1];
+    }
 };
 
 /**
@@ -85,3 +101,14 @@ export const monthlyInstallment = (principal, rate, installmentCount) => {
     return principal * Math.pow(q, installmentCount) * (q - 1) / (Math.pow(q, installmentCount) - 1);
 };
 
+/**
+ * 
+ * @param {number} principal
+ * @param {number} monthlyPayment
+ * @param {number} rate in float not in %, i.e 0.0125 for 12.5%
+ * @returns {number}
+ */
+export const mortgageLength = (principal, monthlyPayment, rate) => {
+    const j = rate / 12;
+    return Math.ceil(- Math.log(1 - principal * j / monthlyPayment) / Math.log(1 + j));
+};

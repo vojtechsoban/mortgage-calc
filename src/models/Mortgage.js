@@ -6,13 +6,20 @@ export class Mortgage {
     /**
      *
      * @param {number} principal
-     * @param {MortgageParameters} parameters
+     * @param {object} parameters
      */
-    constructor (principal, parameters) {
+    constructor(principal, parameters) {
         assert.isNotNull(principal);
         this.principal = principal;
+
         assert.isNotNull(parameters);
-        this.parameters = parameters;
+        if (parameters.constructor.name === 'MortgageParameters') {
+            this.parameters = [parameters];
+        } else {
+            assert.isArray(parameters);
+            assert.isNotEmpty(parameters);
+            this.parameters = parameters;
+        }
         this.installmentSum = 0;
         this.installmentCount = 0;
     }
