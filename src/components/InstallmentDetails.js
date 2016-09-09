@@ -18,7 +18,7 @@ export default ({installments}) => {
         {installments.map((item, id) => {
             return (
                 <tr key={id}>
-                    <td>{item.count +1 }</td>
+                    <td>{typeof item.count === 'number' ? item.count + 1: null}</td>
                     <td>{item.date}</td>
                     <td>{item.payment ? item.payment.toFixed(0) : null}</td>
                     <td>{item.rate ? (item.rate * 100).toFixed(2) : null}</td>
