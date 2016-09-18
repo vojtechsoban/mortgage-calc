@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default reduxForm({
-                             form: 'mortgageInputForm',
+                             form: 'extraPaymentInputForm',
                              fields
                          },
                          mapStateToProps,

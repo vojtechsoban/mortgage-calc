@@ -1,6 +1,6 @@
-import {reduxForm} from 'redux-form'
-import {MortgageInputForm, fields} from '../components/MortgageInputForm'
-import {CalculateMortgageAction} from '../actions/Actions'
+import {reduxForm} from 'redux-form';
+import {MortgageInputForm, fields} from '../components/MortgageInputForm';
+import {CalculateMortgageAction} from '../actions/Actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -21,4 +21,4 @@ export default reduxForm({
                          },
                          mapStateToProps,
                          mapDispatchToProps
-)(MortgageInputForm)
+)(MortgageInputForm);
