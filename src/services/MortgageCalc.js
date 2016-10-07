@@ -54,7 +54,7 @@ export const calculate = (mortgageIn) => {
 
     const _monthlyPayment = monthlyPayment;
 
-    let count = 0;
+    let count = -1;
     let balance = mortgageIn.principal;
     let annualInstalment = new InstallmentSum();
 
@@ -76,7 +76,7 @@ export const calculate = (mortgageIn) => {
             installmentPart,
             payment: payment});
 
-        if (count % 12 === 0) {
+        if (count > 0 && (count + 1) % 12 === 0) {
             mortgage.installments.push({
                 type: 'annual',
                 principalPart: annualInstalment.principalPart,

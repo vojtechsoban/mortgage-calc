@@ -1,5 +1,6 @@
 import {assert, expect, should} from 'chai'
 import {describe, it} from 'mocha';
+import _ from 'lodash';
 
 import {monthlyPayment, calculate, monthlyInstallment, getMortgageParameters, mortgageLength} from '../../src/services/MortgageCalc';
 import {Mortgage, MortgageParameters} from '../../src/models/Mortgage';
@@ -88,11 +89,45 @@ describe('MortgageCalc', () => {
     });
 
     describe('Total mortgage calculation', () => {
-        it('Basic type', () => {
+        it('Basic type - constant parameters', () => {
             const mortgage = new Mortgage(2000000, [new MortgageParameters(0, 0.0379, 10000)]);
             const {installmentSum, installmentCount} = calculate(mortgage);
             expect(installmentSum).to.be.closeTo(1167317.11, 0.1);
             expect(installmentCount).to.be.equal(317);
-        })
+        });
+
+        describe('Variable parameters', () => {
+            it('Variable rate - constant payment', () => {
+                const parameters = [new MortgageParameters(3, 0.2, 2000), new MortgageParameters(6, 0.1, 2000)];
+                const mortgage = new Mortgage(10000, parameters);
+                const expectedInstallments = [167.7, 136.1, 105.1, 36.7, 20.4, 3.9];
+                const {installmentSum, installmentCount} = calculate(mortgage);
+                expect(installmentSum).to.be.closeTo(_.sum(expectedInstallments), 1.5);
+                expect(installmentCount).to.be.equal(expectedInstallments.length);
+            });
+
+            it('Variable rate - variable payment', () => {
+                const parameters = [
+                    new MortgageParameters(3, 0.2, 2000),
+                    new MortgageParameters(0, 0.1, 1000)];
+                const mortgage = new Mortgage(10000, parameters);
+                const expectedInstallments = [167, 136, 105, 37, 29, 21, 12, 4];
+                const {installmentSum, installmentCount} = calculate(mortgage);
+                expect(installmentSum).to.be.closeTo(_.sum(expectedInstallments), 1.5);
+                expect(installmentCount).to.be.equal(expectedInstallments.length);
+            });
+
+            it('Constant rate - variable payment', () => {
+                const parameters = [
+                    new MortgageParameters(3, 0.2, 1000),
+                    new MortgageParameters(3, 0.2, 1500),
+                    new MortgageParameters(3, 0.2, 2000)];
+                const mortgage = new Mortgage(10000, parameters);
+                const expectedInstallments = [166.7, 152.8, 138.7, 124.3, 101.4, 78.1, 54.4, 21.9];
+                const {installmentSum, installmentCount, installments} = calculate(mortgage);
+                expect(installmentSum).to.be.closeTo(_.sum(expectedInstallments), 1.5);
+                expect(installmentCount).to.be.equal(expectedInstallments.length);
+            });
+        });
     });
 });

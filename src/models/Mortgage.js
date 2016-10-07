@@ -25,10 +25,13 @@ export class Mortgage {
     }
 }
 
+/**
+ * Mortgage parameters
+ */
 export class MortgageParameters {
 
     /**
-     *
+     * Constructor
      * @param payments number of payments for which this parameters are valid --> fixation period
      * @param rate installment rate
      * @param payment monthly payment
