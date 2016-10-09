@@ -5,7 +5,7 @@ import {AddExtraPaymentAction} from '../actions/Actions';
 const mapStateToProps = (state) => {
     return {
         // TODO add initial values to state and extract these values from the state
-        initialValues: {paymentIndex: 12, amount: 0.1}
+        initialValues: {paymentIndex: 11, amount: 0.1}
     }
 };
 

@@ -16,9 +16,9 @@ export default (installments) => {
             return (
                 <tr key={id}>
                     <td>{item.count}</td>
-                    <td>{item.payment}</td>
-                    <td>{item.principalPart.toFixed(0)}</td>
-                    <td>{item.installmentPart.toFixed(0)}</td>
+                    <td>{item.payment ? item.payment.toFixed(0) : null}</td>
+                    <td>{item.principalPart ? item.principalPart.toFixed(0) : null}</td>
+                    <td>{item.installmentPart ? item.installmentPart.toFixed(0) : null}</td>
                     <td>{item.type}</td>
                 </tr>
             );

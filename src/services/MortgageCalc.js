@@ -1,7 +1,6 @@
-import assert from 'assert';
-
-import { MONTHS_IN_YEAR } from '../constants/Constants';
-import { InstallmentSum } from '../models/Mortgage';
+import assert from "assert";
+import {MONTHS_IN_YEAR} from "../constants/Constants";
+import {InstallmentSum} from "../models/Mortgage";
 
 export const monthlyPayment = (principal, rate, payment = null) => {
 
@@ -44,6 +43,27 @@ export const getMortgageParameters = (mortgage, paymentIndex) => {
 };
 
 /**
+ * Get extra payment for payment index (count) or null if no extra payment is defined or extra peyments are not defined at all.
+ * @param {Mortgage} mortgage
+ * @param {number} paymentIndex
+ * @returns {ExtraPayment}
+ */
+export const getExtraPayment = (mortgage, paymentIndex) => {
+
+    if (!mortgage.extraPayments) {
+        return null;
+    }
+
+    for (let extraPayment of mortgage.extraPayments) {
+        if (extraPayment.paymentIndex === paymentIndex) {
+            return extraPayment;
+        }
+    }
+
+    return null;
+};
+
+/**
  *
  * @param {Mortgage} mortgageIn
  */
@@ -56,7 +76,7 @@ export const calculate = (mortgageIn) => {
 
     let count = -1;
     let balance = mortgageIn.principal;
-    let annualInstalment = new InstallmentSum();
+    const annualInstalment = new InstallmentSum();
 
     while (balance > 0 && ++count <= 1000) {
 
@@ -74,7 +94,21 @@ export const calculate = (mortgageIn) => {
             principalPart,
             count,
             installmentPart,
-            payment: payment});
+            payment: payment
+        });
+
+        const extraPayment = getExtraPayment(mortgage, count);
+        if (extraPayment) {
+            var absoluteExtraPayment = extraPayment.amount > 1 ? extraPayment.amount : extraPayment.amount * balance;
+            balance -= absoluteExtraPayment;
+            if (extraPayment.type === 'default') {
+                mortgage.installments.push({
+                    type: 'extra',
+                    count,
+                    payment: absoluteExtraPayment
+                });
+            }
+        }
 
         if (count > 0 && (count + 1) % 12 === 0) {
             mortgage.installments.push({

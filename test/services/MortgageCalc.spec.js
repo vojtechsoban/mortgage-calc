@@ -1,10 +1,9 @@
-import {assert, expect, should} from 'chai'
-import {describe, it} from 'mocha';
-import _ from 'lodash';
-
-import {monthlyPayment, calculate, monthlyInstallment, getMortgageParameters, mortgageLength} from '../../src/services/MortgageCalc';
-import {Mortgage, MortgageParameters} from '../../src/models/Mortgage';
-import {MONTHS_IN_YEAR} from '../../src/constants/Constants';
+import {assert, expect, should} from "chai";
+import {describe, it} from "mocha";
+import _ from "lodash";
+import {monthlyPayment, calculate, monthlyInstallment, getMortgageParameters, mortgageLength} from "../../src/services/MortgageCalc";
+import {Mortgage, MortgageParameters, ExtraPayment} from "../../src/models/Mortgage";
+import {MONTHS_IN_YEAR} from "../../src/constants/Constants";
 
 describe('MortgageCalc', () => {
 
@@ -127,6 +126,39 @@ describe('MortgageCalc', () => {
                 const {installmentSum, installmentCount, installments} = calculate(mortgage);
                 expect(installmentSum).to.be.closeTo(_.sum(expectedInstallments), 1.5);
                 expect(installmentCount).to.be.equal(expectedInstallments.length);
+            });
+        });
+
+        describe('Extra payment', () => {
+            it.skip('Absolute value - constant duration', () => {
+                const mortgage = new Mortgage(200000, [new MortgageParameters(0, 0.0379, 5000)]);
+                const {installmentSum, installmentCount} = calculate(mortgage);
+                expect(installmentSum).to.be.closeTo(14148.13, 0.1);
+                expect(installmentCount).to.be.equal(43);
+            });
+
+            it('Absolute value - constant monthly payment', () => {
+                const extraPayments = [new ExtraPayment(11, 10000), new ExtraPayment(23, 20000)];
+                const mortgage = new Mortgage(200000, [new MortgageParameters(0, 0.0379, 5000)], extraPayments);
+                const {installmentSum, installmentCount} = calculate(mortgage);
+                expect(installmentSum).to.be.closeTo(12178.1, 0.1);
+                expect(installmentCount).to.be.equal(37);
+            });
+
+            it('Relative value - constant monthly payment', () => {
+                const extraPayments = [new ExtraPayment(11, 0.1), new ExtraPayment(23, 0.1)];
+                const mortgage = new Mortgage(200000, [new MortgageParameters(0, 0.0379, 5000)], extraPayments);
+                const {installmentSum, installmentCount} = calculate(mortgage);
+                expect(installmentSum).to.be.closeTo(12330.24, 0.1);
+                expect(installmentCount).to.be.equal(39);
+            });
+
+            it.skip('Relative value - constant duration', () => {
+                // TODO
+                const mortgage = new Mortgage(200000, [new MortgageParameters(0, 0.0379, 5000)]);
+                const {installmentSum, installmentCount} = calculate(mortgage);
+                expect(installmentSum).to.be.closeTo(14148.13, 0.1);
+                expect(installmentCount).to.be.equal(43);
             });
         });
     });

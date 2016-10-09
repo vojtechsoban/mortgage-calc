@@ -1,14 +1,15 @@
-import assert from 'assert';
-import 'dash-assert';
+import assert from "assert";
+import "dash-assert";
 
 export class Mortgage {
 
     /**
      *
      * @param {number} principal
-     * @param {object} parameters
+     * @param {Array} parameters
+     * @param {Array} extraPayments
      */
-    constructor(principal, parameters) {
+    constructor(principal, parameters, extraPayments=null) {
         assert.isNotNull(principal);
         this.principal = principal;
 
@@ -22,6 +23,8 @@ export class Mortgage {
         }
         this.installmentSum = 0;
         this.installmentCount = 0;
+
+        this.extraPayments = extraPayments;
     }
 }
 
@@ -57,5 +60,22 @@ export class InstallmentSum {
     add(principalPart, installmentPart) {
         this.installmentPart += installmentPart;
         this.principalPart += principalPart;
+    }
+}
+
+/**
+ * Extra payment
+ */
+export class ExtraPayment {
+    /**
+     * Extra payment constructor
+     * @param {number} paymentIndex
+     * @param {number} amount
+     * @param {string} type
+     */
+    constructor(paymentIndex, amount, type = 'default') {
+        this.paymentIndex = parseInt(paymentIndex);
+        this.amount = parseFloat(amount);
+        this.type = type;
     }
 }
