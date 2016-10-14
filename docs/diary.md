@@ -1,8 +1,8 @@
-Denicek
-=
+Diary
+=====
 
 2016-06-12
--
+----------
 
 I was very confused why hot module replacement works perfectly on one machine and does not work on the other machine.
 The problem was in the editor. While I'm using Idea I was doing some smoke tests with vim. It needs to be configured:
@@ -60,3 +60,7 @@ The problem was in the editor. While I'm using Idea I was doing some smoke tests
 ----------
 * refactored Mortgage model to support variable parameters during mortgage
 * added dash-assert dependency
+
+2016-10-09
+----------
+* Extra payment - constant payment  scenario completed
