@@ -16,11 +16,6 @@ export default (state = null, action) => {
 
         case actionTypes.ADD_EXTRA_PAYMENT:
 
-            if (!result.extraPayments) {
-                // TODO initialize extra payments in default state
-                result.extraPayments = [];
-            }
-
             const extraPaymentToAdd = new ExtraPayment(action.formData.paymentIndex, action.formData.amount, action.formData.type);
 
             // check whether edit existing extra payment or add a new one

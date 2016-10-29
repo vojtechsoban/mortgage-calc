@@ -1,37 +1,29 @@
-import React, { Component, PropTypes } from 'react';
-import { filterProps } from '../services/Utils';
-export const fields = [ 'principal', 'rate', 'monthlyPayment' ];
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {reduxForm, Field} from 'redux-form'
+import {renderInput} from '../services/Utils';
 
-export class MortgageInputForm extends Component {
+class MortgageInputForm extends Component {
+
     render() {
-        const {
-            fields: { principal, rate, monthlyPayment },
-            handleSubmit
-        } = this.props;
-        
+
+        const {handleSubmit} = this.props;
+
         return (<form onSubmit={handleSubmit}>
                 <div>
                     <label>Principal</label>
-                    <div>
-                        <input type="text" placeholder="Principal" {...filterProps(principal)} />
-                    </div>
+                    <Field name="principal" component={renderInput} type="text"/>
                 </div>
                 <div>
                     <label>Rate</label>
-                    <div>
-                        <input type="text" placeholder="Rate" {...filterProps(rate)} />
-                    </div>
+                    <Field name="rate" component={renderInput} type="text"/>
                 </div>
                 <div>
                     <label>Monthly payment</label>
-                    <div>
-                        <input type="text" placeholder="Monthly payment" {...filterProps(monthlyPayment)}/>
-                    </div>
+                    <Field name="monthlyPayment" component={renderInput} type="text"/>
                 </div>
                 <div>
-                    <button type="submit">
-                        Submit
-                    </button>
+                    <button type="submit">Calculate</button>
                 </div>
             </form>
         )
@@ -39,7 +31,16 @@ export class MortgageInputForm extends Component {
 }
 
 MortgageInputForm.propTypes = {
-    fields: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired
 };
 
+let decoratedForm = reduxForm({
+                                  form: 'mortgageInputForm'
+                              }
+)(MortgageInputForm);
+
+decoratedForm = connect(state => {
+    return {initialValues: state.calculateMortgageReducer.initialValues.mortgage};
+})(decoratedForm);
+
+export default decoratedForm;

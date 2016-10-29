@@ -1,31 +1,23 @@
-import React, { Component, PropTypes } from 'react';
-import { filterProps } from '../services/Utils';
-export const fields = [ 'paymentIndex', 'amount' ];
+import React, {Component, PropTypes} from 'react';
+import {reduxForm, Field} from 'redux-form' // imported Field
+import {connect} from 'react-redux';
+import {renderInput} from '../services/Utils';
 
-export class ExtraPaymentInputForm extends Component {
+class ExtraPaymentInputForm extends Component {
     render() {
-        const {
-            fields: { paymentIndex, amount },
-            handleSubmit
-        } = this.props;
-        
+
+        const {handleSubmit} = this.props;
+
         return (<form onSubmit={handleSubmit}>
                 <div>
                     <label>Payment index</label>
-                    <div>
-                        <input type="text" placeholder="Payment index" {...filterProps(paymentIndex)} />
-                    </div>
-                </div>
-                <div>
+                    <Field name="paymentIndex" component={renderInput} type="text"/>
                     <label>Amount</label>
-                    <div>
-                        <input type="text" placeholder="Amount $ or %" {...filterProps(amount)} />
-                    </div>
-                </div>
-                <div>
-                    <button type="submit">
-                        Submit
-                    </button>
+                    <Field name="amount" component={renderInput} type="text"/>
+                    <label>Type</label>
+                    <Field name="type" component="input" type="radio" value="constant_payment" /> Constant payment
+                    <Field name="type" component="input" type="radio" value="constant_duration" /> Constant duration
+                    <button type="submit">Add extra payment</button>
                 </div>
             </form>
         )
@@ -33,7 +25,16 @@ export class ExtraPaymentInputForm extends Component {
 }
 
 ExtraPaymentInputForm.propTypes = {
-    fields: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired
 };
 
+let decoratedForm = reduxForm({
+                                  form: 'extraPaymentInputForm'
+                              }
+)(ExtraPaymentInputForm);
+
+decoratedForm = connect(state => {
+    return {initialValues: state.calculateMortgageReducer.initialValues.extraPayments};
+})(decoratedForm);
+
+export default decoratedForm;

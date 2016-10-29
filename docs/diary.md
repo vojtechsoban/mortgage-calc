@@ -64,3 +64,10 @@ The problem was in the editor. While I'm using Idea I was doing some smoke tests
 2016-10-09
 ----------
 * Extra payment - constant payment  scenario completed
+
+
+2016-10-29
+----------
+
+* created basic webpack prod config
+* migrated to redux-form 6.1.1

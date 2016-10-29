@@ -99,7 +99,7 @@ export const calculate = (mortgageIn) => {
 
         const extraPayment = getExtraPayment(mortgage, count);
         if (extraPayment) {
-            var absoluteExtraPayment = extraPayment.amount > 1 ? extraPayment.amount : extraPayment.amount * balance;
+            let absoluteExtraPayment = extraPayment.amount > 1 ? extraPayment.amount : extraPayment.amount * balance;
             balance -= absoluteExtraPayment;
             if (extraPayment.type === 'default') {
                 mortgage.installments.push({
