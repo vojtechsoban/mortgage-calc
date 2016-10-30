@@ -1,6 +1,6 @@
 import assert from "assert";
 import {MONTHS_IN_YEAR} from "../constants/Constants";
-import {InstallmentSum} from "../models/Mortgage";
+import {InstallmentSum,MortgageParameters} from "../models/Mortgage";
 
 export const monthlyPayment = (principal, rate, payment = null) => {
 
@@ -42,6 +42,40 @@ export const getMortgageParameters = (mortgage, paymentIndex) => {
     }
 };
 
+export const pushMortgageParameters = (mortgage, paymentIndex, parameters) => {
+
+    assert.isNotEmpty(mortgage.parameters);
+
+// FIXME insert into correct position
+    mortgage.parameters.splice(0, 1, parameters);
+};
+
+export const getRemainingPeriod = (mortgage, paymentIndex) => {
+
+    assert.isNotEmpty(mortgage.parameters);
+
+    const remainder = (parameters, paymentIndex, paymentSum = 0) => {
+        const result = paymentSum + parameters.payments - paymentIndex - 1;
+        // cover scenario when requesting remainder after period finished (and mortgage is not payed) and also for constant parameters
+        return result > 0 ? result : 0;
+    };
+
+    if (mortgage.parameters.length === 1) {
+        return remainder(mortgage.parameters[0], paymentIndex);
+    } else {
+        let paymentSum = 0;
+        for (let parameters of mortgage.parameters) {
+            if (paymentSum + parameters.payments >= paymentIndex + 1) {
+                return remainder(parameters, paymentIndex, paymentSum);
+            }
+            paymentSum += parameters.payments;
+        }
+
+        // fallback - return 0 if there are no more parameters
+        return 0;
+    }
+};
+
 /**
  * Get extra payment for payment index (count) or null if no extra payment is defined or extra peyments are not defined at all.
  * @param {Mortgage} mortgage
@@ -75,12 +109,12 @@ export const calculate = (mortgageIn) => {
     const _monthlyPayment = monthlyPayment;
 
     let count = -1;
-    let balance = mortgageIn.principal;
+    let balance = mortgage.principal;
     const annualInstalment = new InstallmentSum();
 
     while (balance > 0 && ++count <= 1000) {
 
-        const { rate, payment } = getMortgageParameters(mortgageIn, count);
+        const { rate, payment } = getMortgageParameters(mortgage, count);
         const {installmentPart, principalPart} = _monthlyPayment(balance, rate, payment);
 
         balance -= principalPart;
@@ -94,20 +128,28 @@ export const calculate = (mortgageIn) => {
             principalPart,
             count,
             installmentPart,
-            payment: payment
+            payment,
+            rate
         });
 
         const extraPayment = getExtraPayment(mortgage, count);
         if (extraPayment) {
+            // TODO use a flag to determine amount type of extra payment
             let absoluteExtraPayment = extraPayment.amount > 1 ? extraPayment.amount : extraPayment.amount * balance;
             balance -= absoluteExtraPayment;
-            if (extraPayment.type === 'default') {
-                mortgage.installments.push({
-                    type: 'extra',
-                    count,
-                    payment: absoluteExtraPayment
-                });
+
+            if (extraPayment.type === 'constant_duration') {
+                const remainingPeriod = getRemainingPeriod(mortgage, count);
+                const actualMortgageLength = mortgageLength(balance, payment, rate);
+                const newMonthlyPayment = monthlyInstallment(balance, rate, actualMortgageLength);
+                pushMortgageParameters(mortgage, count, new MortgageParameters(remainingPeriod, rate, newMonthlyPayment));
             }
+
+            mortgage.installments.push({
+                type: 'extra',
+                count,
+                payment: absoluteExtraPayment
+            });
         }
 
         if (count > 0 && (count + 1) % 12 === 0) {
@@ -115,7 +157,7 @@ export const calculate = (mortgageIn) => {
                 type: 'annual',
                 principalPart: annualInstalment.principalPart,
                 installmentPart: annualInstalment.installmentPart
-                                       });
+            });
             annualInstalment.reset();
         }
     }

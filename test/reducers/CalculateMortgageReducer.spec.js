@@ -14,10 +14,12 @@ describe('MortgageCalcReducer', () => {
     it('should should calculate mortgage - constant parameters', () => {
         expect(calc(undefined, {type: 'init'})).to.be.null;
         // TODO share initialState between tests and app
-        const initialState = {mortgage: null};
+        const initialState = {mortgage: null, extraPayments: []};
         const formData = {principal: 10000, rate: 1.5, monthlyPayment: 6000};
         const expected = {
+            extraPayments: [],
             mortgage: {
+                extraPayments: [],
                 installmentCount: 2,
                 installmentSum: 17.515625,
                 principal: 10000,
@@ -34,14 +36,16 @@ describe('MortgageCalcReducer', () => {
                         type: 'regular',
                         installmentPart: 12.5,
                         principalPart: 5987.5,
-                        payment: formData.monthlyPayment
+                        payment: formData.monthlyPayment,
+                        rate: formData.rate / 100
                     },
                     {
                         count: 1,
                         type: 'regular',
                         installmentPart: 5.015625,
                         principalPart: 4012.5,
-                        payment: formData.monthlyPayment
+                        payment: formData.monthlyPayment,
+                        rate: formData.rate / 100
                     }
                 ]
             }

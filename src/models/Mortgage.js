@@ -9,7 +9,7 @@ export class Mortgage {
      * @param {Array} parameters
      * @param {Array} extraPayments
      */
-    constructor(principal, parameters, extraPayments=null) {
+    constructor(principal, parameters, extraPayments=[]) {
         assert.isNotNull(principal);
         this.principal = principal;
 

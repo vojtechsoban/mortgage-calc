@@ -65,6 +65,10 @@ The problem was in the editor. While I'm using Idea I was doing some smoke tests
 ----------
 * Extra payment - constant payment  scenario completed
 
+2016-10-15
+----------
+* Extra payment - constant duration scenario completed
+
 
 2016-10-29
 ----------

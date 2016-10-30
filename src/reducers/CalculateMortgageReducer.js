@@ -32,6 +32,14 @@ export default (state = null, action) => {
 
             return result;
 
+        case actionTypes.REMOVE_EXTRA_PAYMENT:
+            console.log('remove extra payment', action.paymentIndex, action);
+            return result;
+
+        case actionTypes.EDIT_EXTRA_PAYMENT:
+            console.log('edit extra payment', action.paymentIndex, action);
+            return result;
+
         default:
             return state;
     }

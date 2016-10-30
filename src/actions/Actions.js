@@ -13,3 +13,12 @@ export const AddExtraPaymentAction = (formData) => {
         formData
     };
 };
+
+export const RemoveExtraPayment = (paymentIndex) => {
+    return {type: actionTypes.REMOVE_EXTRA_PAYMENT, paymentIndex};
+};
+
+export const EditExtraPayment = (paymentIndex) => {
+    return {type: actionTypes.EDIT_EXTRA_PAYMENT, paymentIndex};
+};
+

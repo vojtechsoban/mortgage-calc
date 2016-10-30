@@ -1,7 +1,14 @@
 import {assert, expect, should} from "chai";
 import {describe, it} from "mocha";
 import _ from "lodash";
-import {monthlyPayment, calculate, monthlyInstallment, getMortgageParameters, mortgageLength} from "../../src/services/MortgageCalc";
+import {
+    monthlyPayment,
+    calculate,
+    monthlyInstallment,
+    getMortgageParameters,
+    getRemainingPeriod,
+    mortgageLength
+} from "../../src/services/MortgageCalc";
 import {Mortgage, MortgageParameters, ExtraPayment} from "../../src/models/Mortgage";
 import {MONTHS_IN_YEAR} from "../../src/constants/Constants";
 
@@ -13,7 +20,7 @@ describe('MortgageCalc', () => {
         const parameters3 = new MortgageParameters(24, 0.011, 1500);
 
         it('should return always the only parameter set', () => {
-            const mortgage = new Mortgage(1000000, parameters1);
+            const mortgage = new Mortgage(1000000, [parameters1]);
             expect(getMortgageParameters(mortgage, 0)).to.deep.equal(parameters1);
             expect(getMortgageParameters(mortgage, 5)).to.deep.equal(parameters1);
             expect(getMortgageParameters(mortgage, 25)).to.deep.equal(parameters1);
@@ -41,6 +48,48 @@ describe('MortgageCalc', () => {
             // rest periods
             expect(getMortgageParameters(mortgage, 200)).to.deep.equal(parameters3);
         });
+    });
+
+    it('Constant parameters should always return 0 payments till end of fixation period.', ()=> {
+        const parameters = new MortgageParameters(0, 0.015, 1000);
+        const mortgage = new Mortgage(1000000, [parameters]);
+
+        expect(getRemainingPeriod(mortgage, 0)).to.be.equal(0);
+        expect(getRemainingPeriod(mortgage, 5)).to.be.equal(0);
+        expect(getRemainingPeriod(mortgage, 100)).to.be.equal(0);
+        expect(getRemainingPeriod(mortgage, 100000)).to.be.equal(0);
+    });
+
+    it('Constant parameters should return 0 payments when reached end and still not finished.', ()=> {
+        const parameters = new MortgageParameters(3, 0.015, 1000);
+        const mortgage = new Mortgage(1000000, [parameters]);
+
+        expect(getRemainingPeriod(mortgage, 0)).to.be.equal(2);
+        expect(getRemainingPeriod(mortgage, 1)).to.be.equal(1);
+        expect(getRemainingPeriod(mortgage, 2)).to.be.equal(0);
+        expect(getRemainingPeriod(mortgage, 3)).to.be.equal(0);
+        expect(getRemainingPeriod(mortgage, 100)).to.be.equal(0);
+    });
+
+    describe('Retrieve remaining payments until end of fixation period', () => {
+
+        const testParameters = [[0, 1], [1, 0], [2, 3], [3, 2], [4, 1], [5, 0], [6, 2], [7, 1], [8, 0]];
+        const parameters1 = new MortgageParameters(2, 0.015, 1000);
+        const parameters2 = new MortgageParameters(4, 0.012, 2000);
+        const parameters3 = new MortgageParameters(3, 0.015, 1000);
+        const mortgage = new Mortgage(1000000, [parameters1, parameters2, parameters3]);
+
+        for (const testParameter of testParameters) {
+            const paymentIndex = testParameter[0];
+            const expectedRemainder = testParameter[1];
+            it(`PaymentIndex=${paymentIndex} should have remainder=${expectedRemainder}`, ()=> {
+                expect(getRemainingPeriod(mortgage, paymentIndex)).to.be.equal(expectedRemainder);
+            });
+        }
+    });
+
+    describe('Push mortgage parameters', () => {
+
     });
 
     describe('Monthly payment calculation', () => {
@@ -130,11 +179,13 @@ describe('MortgageCalc', () => {
         });
 
         describe('Extra payment', () => {
-            it.skip('Absolute value - constant duration', () => {
-                const mortgage = new Mortgage(200000, [new MortgageParameters(0, 0.0379, 5000)]);
+            it('Absolute value - constant duration', () => {
+                const extraPayments = [new ExtraPayment(11, 10000, 'constant_duration'), new ExtraPayment(23, 20000, 'constant_duration')];
+                const mortgage = new Mortgage(200000, [new MortgageParameters(40, 0.0379, 5000)], extraPayments);
                 const {installmentSum, installmentCount} = calculate(mortgage);
-                expect(installmentSum).to.be.closeTo(14148.13, 0.1);
-                expect(installmentCount).to.be.equal(43);
+                expect(installmentSum).to.be.closeTo(12260.62, 0.1);
+                expect(installmentCount).to.be.equal(37);
+
             });
 
             it('Absolute value - constant monthly payment', () => {
@@ -153,12 +204,12 @@ describe('MortgageCalc', () => {
                 expect(installmentCount).to.be.equal(39);
             });
 
-            it.skip('Relative value - constant duration', () => {
-                // TODO
-                const mortgage = new Mortgage(200000, [new MortgageParameters(0, 0.0379, 5000)]);
+            it('Relative value - constant duration', () => {
+                const extraPayments = [new ExtraPayment(11, 0.1, 'constant_duration'), new ExtraPayment(23, 0.1, 'constant_duration')];
+                const mortgage = new Mortgage(200000, [new MortgageParameters(40, 0.0379, 5000)], extraPayments);
                 const {installmentSum, installmentCount} = calculate(mortgage);
-                expect(installmentSum).to.be.closeTo(14148.13, 0.1);
-                expect(installmentCount).to.be.equal(43);
+                expect(installmentSum).to.be.closeTo(12471.36, 0.1);
+                expect(installmentCount).to.be.equal(39);
             });
         });
     });

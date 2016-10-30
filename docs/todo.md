@@ -1,13 +1,26 @@
 # TODOs
 
-## App feature todos
+## Project feature todos
 
-
+* test
+  * share objects between tests
+  * mock services & utils in tests to isolate unrelated input / output changes
+  * use [rewire](https://github.com/jhnns/rewire) to test unexported functions
 * dev tools
 * persist / load state - maybe part of dev tools
 * UI tests
 * reducers test
-* prod config
+* prod config / bundle app for static web
+
+## Application feature todos
+* mortgage parameters
+  * fix inserting mortgage parameters: find correct index and slice actual parameters
+  * write test for inserting parameters
+* extra payments
+  * order extra payments to enable inserting extra payments
+  * use a flag to determine amount type (absolute / relative) of extra payment
+  * add extra payment specification to the form: constant payment / duration; amount type
+  * enable removing extra payments
 
 ## Knowledge todos
 
