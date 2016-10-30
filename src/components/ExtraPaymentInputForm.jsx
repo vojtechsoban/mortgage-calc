@@ -1,7 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import {reduxForm, Field} from 'redux-form' // imported Field
-import {connect} from 'react-redux';
-import {renderInput} from '../services/Utils';
+import React, {Component, PropTypes} from "react";
+import {reduxForm, Field} from "redux-form";
+import {connect} from "react-redux";
+import {renderInput} from "../services/Utils"; // imported Field
 
 class ExtraPaymentInputForm extends Component {
     render() {
@@ -28,13 +28,15 @@ ExtraPaymentInputForm.propTypes = {
     onSubmit: PropTypes.func.isRequired
 };
 
+// TODO better than enableReinitialize - use redux-form action creator: initialize(form:String, data:Object, keepDirty:boolean)
 let decoratedForm = reduxForm({
-                                  form: 'extraPaymentInputForm'
+                                  form: 'extraPaymentInputForm',
+                                  enableReinitialize: true
                               }
 )(ExtraPaymentInputForm);
 
-decoratedForm = connect(state => {
-    return {initialValues: state.calculateMortgageReducer.initialValues.extraPayments};
-})(decoratedForm);
+decoratedForm = connect(state => ({
+    initialValues: state.calculateMortgageReducer.initialValues.extraPayments
+}))(decoratedForm);
 
 export default decoratedForm;

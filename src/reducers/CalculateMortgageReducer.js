@@ -33,11 +33,13 @@ export default (state = null, action) => {
             return result;
 
         case actionTypes.REMOVE_EXTRA_PAYMENT:
-            console.log('remove extra payment', action.paymentIndex, action);
+            result.extraPayments = state.extraPayments.filter(extraPayment => extraPayment.paymentIndex !== action.paymentIndex);
             return result;
 
         case actionTypes.EDIT_EXTRA_PAYMENT:
-            console.log('edit extra payment', action.paymentIndex, action);
+            // TODO see ExtraPaymentInputForm - use redux-form action creator: initialize(form:String, data:Object, keepDirty:boolean)
+            const extraPaymentToEdit = state.extraPayments.find(extraPayment => extraPayment.paymentIndex === action.paymentIndex);
+            result.initialValues.extraPayments = extraPaymentToEdit;
             return result;
 
         default:
