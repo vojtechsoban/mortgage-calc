@@ -75,3 +75,7 @@ The problem was in the editor. While I'm using Idea I was doing some smoke tests
 
 * created basic webpack prod config
 * migrated to redux-form 6.1.1
+
+2016-11-03
+----------
+* Edit/Remove extra payment
