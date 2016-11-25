@@ -1,6 +1,6 @@
-import assert from "assert";
-import {MONTHS_IN_YEAR} from "../constants/Constants";
-import {InstallmentSum,MortgageParameters} from "../models/Mortgage";
+import assert from 'assert';
+import {MONTHS_IN_YEAR} from '../constants/Constants';
+import {InstallmentSum,MortgageParameters} from '../models/Mortgage';
 
 export const monthlyPayment = (principal, rate, payment = null) => {
 

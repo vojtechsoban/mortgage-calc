@@ -1,5 +1,5 @@
-import assert from "assert";
-import "dash-assert";
+import assert from 'assert';
+import 'dash-assert';
 
 export class Mortgage {
 

@@ -1,9 +1,11 @@
-import React, {Component, PropTypes} from "react";
-import {connect} from "react-redux";
-import {EditExtraPayment, RemoveExtraPayment} from "../actions/Actions";
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {EditExtraPayment, RemoveExtraPayment} from '../actions/Actions';
 
 const ExtraPayment = ({extraPayment, onClickHandler, removeExtraPayment}) => (
-    <li><span onClick={()=> {onClickHandler(extraPayment.paymentIndex)}}>
+    <li><span onClick={()=> {
+        onClickHandler(extraPayment.paymentIndex)
+    }}>
         PaymentIndex={extraPayment.paymentIndex}, amount={extraPayment.amount}</span>
         <span onClick={()=> {
             removeExtraPayment(extraPayment.paymentIndex)
