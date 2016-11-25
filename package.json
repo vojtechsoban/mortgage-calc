@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
-    "start": "node server.js",
+    "start": "BABEL_ENV=dev node server.js",
+    "dist": "BABEL_ENV=prod webpack --config webpack.config.prod.js --progress -p",
     "lint": "eslint src",
-    "test": "mocha --compilers js:babel-register --recursive",
+    "test": "BABEL_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
@@ -40,6 +41,7 @@
     "enzyme": "^2.6.0",
     "eslint": "^3.10.2",
     "eslint-plugin-react": "^6.7.1",
+    "html-webpack-plugin": "^2.24.1",
     "jsdom": "^9.8.3",
     "jsdom-global": "^2.1.0",
     "mocha": "^3.1.2",
