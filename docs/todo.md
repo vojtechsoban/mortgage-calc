@@ -6,11 +6,14 @@
   * share objects between tests
   * mock services & utils in tests to isolate unrelated input / output changes
   * use [rewire](https://github.com/jhnns/rewire) to test unexported functions
-* dev tools
-* persist / load state - maybe part of dev tools
-* UI tests
-* reducers test
-* prod config / bundle app for static web
+  * ~~UI tests~~
+  * ~~reducers test~~
+* ~~dev tools~~
+* persist / load state - maybe part of Redux Dev tools
+* ~~prod config / bundle app for static web~~
+* add styles and pack them, configure loaders
+* i18n using [react-intl](https://github.com/yahoo/react-intl)
+
 
 ## Application feature todos
 * mortgage parameters
@@ -19,8 +22,8 @@
 * extra payments
   * order extra payments to enable inserting extra payments
   * use a flag to determine amount type (absolute / relative) of extra payment
-  * add extra payment specification to the form: constant payment / duration; amount type
-  * enable removing extra payments
+  * ~~add extra payment specification to the form: constant payment / duration; amount type~~
+  * ~~enable removing extra payments~~
 
 ## Knowledge todos
 

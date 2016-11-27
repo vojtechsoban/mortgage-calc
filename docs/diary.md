@@ -74,8 +74,24 @@ The problem was in the editor. While I'm using Idea I was doing some smoke tests
 ----------
 
 * created basic webpack prod config
-* migrated to redux-form 6.1.1
+* migrated to redux-form 6.1.1 to get rid of workaround of [issue](https://github.com/erikras/redux-form/issues/1249)
 
 2016-11-03
 ----------
 * Edit/Remove extra payment
+
+2016-11-20
+----------
+
+* completed dist/prod configuration
+* introduced webpack html plugin to generate index.html
+* completed test setup to support full mounting of React components using Enzyme
+
+
+2016-11-27
+----------
+
+* introduced Redux dev tools
+* upgraded (dev)dependencies
+
+

@@ -6,9 +6,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'eval',
   entry: [
-    'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server',
+    'react-hot-loader/patch',
     './src/index'
   ],
   output: {
@@ -24,6 +24,17 @@ module.exports = {
           template: 'src/index.hbs'
     })
   ],
+  resolve: {
+    alias: {
+      'redux-devtools/lib': path.join(__dirname, '..', '..', 'src'),
+      'redux-devtools': path.join(__dirname, '..', '..', 'src'),
+      'react': path.join(__dirname, 'node_modules', 'react')
+    },
+    extensions: ['', '.js']
+  },
+  resolveLoader: {
+    'fallback': path.join(__dirname, 'node_modules')
+  },
   module: {
     loaders: [{
       test: /\.jsx?$/,
