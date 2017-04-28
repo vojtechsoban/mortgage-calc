@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {reduxForm, Field} from 'redux-form'
+import {FormGroup, ControlLabel, Button} from 'react-bootstrap';
 import {renderInput} from '../services/Utils';
 
 class MortgageInputForm extends Component {
@@ -10,21 +11,21 @@ class MortgageInputForm extends Component {
         const {handleSubmit} = this.props;
 
         return (<form onSubmit={handleSubmit}>
-                <div>
-                    <label>Principal</label>
-                    <Field name="principal" component={renderInput} type="text"/>
-                </div>
-                <div>
+                <FormGroup>
+                    <ControlLabel>Principal</ControlLabel>
+                    <Field name="principal" component={renderInput} type="text" className="form-control" />
+                </FormGroup>
+                <FormGroup>
                     <label>Rate</label>
-                    <Field name="rate" component={renderInput} type="text"/>
-                </div>
-                <div>
+                    <Field name="rate" component={renderInput} type="text" className="form-control" />
+                </FormGroup>
+                <FormGroup>
                     <label>Monthly payment</label>
-                    <Field name="monthlyPayment" component={renderInput} type="text"/>
-                </div>
-                <div>
-                    <button type="submit">Calculate</button>
-                </div>
+                    <Field name="monthlyPayment" component={renderInput} type="text" className="form-control" />
+                </FormGroup>
+                <FormGroup>
+                    <Button type="submit">Calculate</Button>
+                </FormGroup>
             </form>
         )
     }

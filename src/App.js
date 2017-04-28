@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Layout from './Layout';
+import {Grid, Row} from 'react-bootstrap';
 import MortgageInputForm from './components/MortgageInputForm';
 import ExtraPaymentsContainer from './containers/ExtraPaymentsContainer';
 import MortgageResultFormContainer from './containers/MortgageResultContainer';
@@ -14,14 +14,26 @@ import { AddExtraPaymentAction, CalculateMortgageAction } from './actions/Action
 // https://github.com/reactjs/react-router/issues/2182
 
 export default class App extends Component {
-    render() {
-        return (
-            <Layout>
-                <MortgageInputForm onSubmit={(formData, dispatch) => { dispatch(CalculateMortgageAction(formData)); } } />
-                <ExtraPaymentInputForm onSubmit={(formData, dispatch) => { dispatch(AddExtraPaymentAction(formData)); } } />
-                <ExtraPaymentsContainer />
-                <MortgageResultFormContainer />
-            </Layout>
-        );
-    }
+  render() {
+    return (
+      <Grid>
+        <Row>
+          <MortgageInputForm onSubmit={(formData, dispatch) => {
+            dispatch(CalculateMortgageAction(formData));
+          } } className="form-group" />
+        </Row>
+        <Row>
+          <ExtraPaymentInputForm onSubmit={(formData, dispatch) => {
+            dispatch(AddExtraPaymentAction(formData));
+          } }/>
+        </Row>
+        <Row>
+          <ExtraPaymentsContainer />
+        </Row>
+        <Row>
+          <MortgageResultFormContainer />
+        </Row>
+      </Grid>
+    );
+  }
 }

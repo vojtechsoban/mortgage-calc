@@ -1,7 +1,8 @@
 import React from 'react';
+import {Table} from 'react-bootstrap';
 
 export default (installments) => {
-    return (<table>
+    return (<Table striped bordered condensed hover>
         <thead>
         <tr>
             <th>index</th>
@@ -26,5 +27,5 @@ export default (installments) => {
             );
         })}
         </tbody>
-    </table>);
+    </Table>);
 };
