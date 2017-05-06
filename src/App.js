@@ -14,11 +14,11 @@ import {AddExtraPaymentAction, CalculateMortgageAction} from './actions/Actions'
 // https://github.com/reactjs/react-router/issues/2182
 
 export default class App extends Component {
-
+  
   onClicksubmitFormon = () => {
     this.refs.mortgageForm.getWrappedInstance().submit()
   }
-
+  
   render() {
     return (
       <Grid>
@@ -40,7 +40,9 @@ export default class App extends Component {
           </Col>
         </Row>
         <Row>
-          <ExtraPaymentsContainer />
+          <Col xs={8} md={8}>
+            <ExtraPaymentsContainer />
+          </Col>
         </Row>
         <Row>
           <MortgageResultFormContainer />
