@@ -4,7 +4,7 @@ import MortgageInputForm from './components/MortgageInputForm';
 import ExtraPaymentsContainer from './containers/ExtraPaymentsContainer';
 import MortgageResultFormContainer from './containers/MortgageResultContainer';
 import ExtraPaymentInputForm from './components/ExtraPaymentInputForm'
-import {AddExtraPaymentAction, CalculateMortgageAction} from './actions/Actions';
+import {AddExtraPaymentAction, CalculateMortgageAction, SaveExtraPayment} from './actions/Actions';
 
 // If you use React Router, make this component
 // render <Router> with your routes. Currently,
@@ -41,7 +41,7 @@ export default class App extends Component {
         </Row>
         <Row>
           <Col xs={8} md={8}>
-            <ExtraPaymentsContainer />
+            <ExtraPaymentsContainer onSubmit={(extraPayment, dispatch) => {dispatch(SaveExtraPayment(extraPayment));}}/>
           </Col>
         </Row>
         <Row>
