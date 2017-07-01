@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
+import {FormControl, Radio, Tooltip} from 'react-bootstrap';
 
-export const renderInput = field => {  // Define stateless component to render input and errors
- return (<div>
-        <input {...field.input} type={field.type} />
-        {field.meta.touched &&
-         field.meta.error &&
-         <span className="error">{field.meta.error}</span>}
-    </div>);
+export const renderInput = field => {
+ return (<FormControl {...field.input} type={field.type} title={field.title}>
+ </FormControl>);
 };
+
+export const renderRadio = (text) => (field => (<Radio inline {...field.input}>{text}</Radio>));

@@ -2,6 +2,7 @@
 export const initialState = {
     calculateMortgageReducer: {
         mortgage: null,
+        editingExtraPayment: null,
         extraPayments: [],
         initialValues: {
             mortgage: {

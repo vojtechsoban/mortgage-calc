@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
+import {Table} from 'react-bootstrap';
 import installmentDetails from './InstallmentDetails';
+
 
 export default class MortgageResult extends Component {
 
@@ -12,7 +14,7 @@ export default class MortgageResult extends Component {
 
         return (
             <div>
-                <table>
+                <Table striped bordered condensed hover>
                     <tbody>
                     <tr>
                         <td>Installment count</td>
@@ -23,7 +25,7 @@ export default class MortgageResult extends Component {
                         <td>{installmentSum.toFixed(0)}</td>
                     </tr>
                     </tbody>
-                </table>
+                </Table>
 
                 {installmentDetails(installments)}
 
