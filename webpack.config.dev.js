@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const defaultConfig = {
   resolve: {
@@ -27,7 +28,10 @@ const defaultConfig = {
         exclude: /node_modules/
       }, {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       }, {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'url-loader?limit=10000&mimetype=application/font-woff'
@@ -86,6 +90,7 @@ module.exports = Object.assign({}, defaultConfig, {
   
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
       title: 'Custom template using Handlebars',
       template: 'src/index.hbs'
