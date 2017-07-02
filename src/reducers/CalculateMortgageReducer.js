@@ -10,6 +10,10 @@ export default (state = null, action) => {
   
   switch (action.type) {
     case actionTypes.CALCULATE_MORTGAGE:
+      const start = new Date(parseInt(action.formData.start));
+      start.setHours(0,0,0,0);
+      console.log(`start=${start}`);
+      
       const parameters = new MortgageParameters(0, action.formData.rate / 100, parseFloat(action.formData.monthlyPayment));
       result.mortgage = calculate(new Mortgage(parseFloat(action.formData.principal), [parameters], state.extraPayments));
       return result;

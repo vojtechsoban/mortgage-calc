@@ -44,6 +44,8 @@
     "enzyme": "^2.6.0",
     "eslint": "^3.11.0",
     "eslint-plugin-react": "^6.10.3",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
     "jsdom": "^9.8.3",
     "jsdom-global": "^2.1.0",
@@ -54,7 +56,8 @@
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.1.1",
     "sinon": "^1.17.6",
-    "webpack": "^2.2.1",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.0.0",
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {

@@ -5,7 +5,7 @@ import {
 import {reduxForm, Field} from "redux-form";
 import {connect} from "react-redux";
 import {renderInput, renderRadio} from "../services/Utils";
-
+import DateTimeField from 'react-bootstrap-datetimepicker';
 const tooltip = text => (<Tooltip placement="top" id="tooltip">
   {text}
 </Tooltip>);

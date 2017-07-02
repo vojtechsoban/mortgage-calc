@@ -1,3 +1,6 @@
+// Import bundled CSS files globally
+import './app.css';
+
 import React, {Component} from 'react';
 import {Grid, Row, Col, FormGroup, Button} from 'react-bootstrap';
 import MortgageInputForm from './components/MortgageInputForm';
