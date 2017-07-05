@@ -1,4 +1,5 @@
 export const CALCULATE_MORTGAGE = 'CALCULATE_MORTGAGE';
+export const UPDATE_MORTGAGE_START = 'UPDATE_MORTGAGE_START';
 
 // Extra Payments actions
 export const ADD_EXTRA_PAYMENT = 'ADD_EXTRA_PAYMENT';

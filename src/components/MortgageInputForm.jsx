@@ -3,7 +3,8 @@ import {FormGroup, ControlLabel, Button, Grid, Row, Col} from 'react-bootstrap';
 import DateTimeField from 'react-bootstrap-datetimepicker';
 import {connect} from 'react-redux';
 import {reduxForm, Field} from 'redux-form'
-import {renderInput, renderDateTime} from '../services/Utils';
+import {renderInput} from '../services/Utils';
+import {updateMortgageStart} from '../actions/Actions';
 
 class MortgageInputForm extends Component {
   
@@ -37,7 +38,11 @@ class MortgageInputForm extends Component {
             <Col xs={8} md={4}>
               <FormGroup>
                 <ControlLabel>Mortgage start</ControlLabel>
-                <Field name='start' component={renderDateTime} type="text" className="form-control"/>
+                <DateTimeField
+                  dateTime={new Date().getTime()}
+                  mode='date' inputFormat='D.M.YYYY'
+                  onChange={start => {this.props.dispatch(updateMortgageStart(start));}}
+                />
               </FormGroup>
             </Col>
           </Row>
@@ -66,7 +71,7 @@ let decoratedForm = reduxForm({
 decoratedForm = connect(state => ({
     initialValues: state.calculateMortgageReducer.initialValues.mortgage
   }),
-  null,
+  dispatch => ({dispatch}),
   null,
   {withRef: true}
 )(decoratedForm);

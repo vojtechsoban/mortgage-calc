@@ -30,3 +30,7 @@ export const EditExtraPayment = (paymentIndex) => {
   return {type: actionTypes.EDIT_EXTRA_PAYMENT, paymentIndex};
 };
 
+export const updateMortgageStart = start => ({
+  type: actionTypes.UPDATE_MORTGAGE_START,
+  start: parseInt(start)
+});

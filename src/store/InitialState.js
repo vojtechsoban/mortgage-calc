@@ -1,4 +1,8 @@
 // properties must match reducer names - see reducers/index.js
+
+const start =  new Date();
+start.setHours(0, 0, 0, 0);
+
 export const initialState = {
     calculateMortgageReducer: {
         mortgage: null,

@@ -1,6 +1,7 @@
 import {calculate} from '../services/MortgageCalc';
 import {Mortgage, MortgageParameters, ExtraPayment} from '../models/Mortgage';
 import * as actionTypes from '../constants/ActionTypes';
+import moment from 'moment';
 
 // The reducer is called during some initialization before the initial state is assigned.
 // Even if we use initial state in createStore we need to use default argument and assing null
@@ -10,18 +11,19 @@ export default (state = null, action) => {
   
   switch (action.type) {
     case actionTypes.CALCULATE_MORTGAGE:
-      const start = new Date(parseInt(action.formData.start));
-      start.setHours(0,0,0,0);
-      console.log(`start=${start}`);
-      
-      const parameters = new MortgageParameters(0, action.formData.rate / 100, parseFloat(action.formData.monthlyPayment));
-      result.mortgage = calculate(new Mortgage(parseFloat(action.formData.principal), [parameters], state.extraPayments));
+
+      const parameters = new MortgageParameters(
+        0,
+        action.formData.rate / 100, parseFloat(action.formData.monthlyPayment));
+
+      result.mortgage = calculate(new Mortgage(parseFloat(action.formData.principal), [parameters], state.extraPayments, state.start));
       return result;
     
     case actionTypes.ADD_EXTRA_PAYMENT:
       
       const extraPaymentToAdd = new ExtraPayment(action.formData.paymentIndex, action.formData.amount, action.formData.type);
-      
+      extraPaymentToAdd.date = moment(state.start).add(parseInt(action.formData.paymentIndex) + 1, 'M').format('D.M.Y');
+
       // check whether edit existing extra payment or add a new one
       for (let i = 0; i < result.extraPayments.length; i++) {
         if (extraPaymentToAdd.paymentIndex === result.extraPayments[i].paymentIndex) {
@@ -35,7 +37,28 @@ export default (state = null, action) => {
       result.extraPayments = [...result.extraPayments, extraPaymentToAdd];
       
       return result;
-    
+
+    case actionTypes.UPDATE_MORTGAGE_START:
+
+      result.start = action.start;
+
+      result.extraPayments = result.extraPayments.map(extraPayment => {
+        const exout = Object.assign({}, extraPayment);
+        exout.date = moment(result.start).add(extraPayment.paymentIndex + 1, 'M').format('D.M.Y');
+        return exout;
+      });
+
+      if (result.mortgage && result.mortgage.installments) {
+        result.mortgage.installments = result.mortgage.installments.map(extraPayment => {
+          const exout = Object.assign({}, extraPayment);
+          exout.date = moment(result.start).add(extraPayment.count + 1, 'M').format('D.M.Y');
+          return exout;
+        });
+        result.mortgage = Object.assign({}, result.mortgage);
+      }
+
+      return result;
+
     case actionTypes.REMOVE_EXTRA_PAYMENT:
       result.extraPayments = state.extraPayments.filter(extraPayment => extraPayment.paymentIndex !== action.paymentIndex);
       return result;

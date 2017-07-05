@@ -11,6 +11,7 @@ const ExtraPayment = ({extraPayment, extraPaymentActions}) => (
     extraPaymentActions.onClickHandler(extraPayment.paymentIndex)
   }}>
     <td>{extraPayment.paymentIndex}</td>
+    <td>{extraPayment.date}</td>
     <td>{extraPayment.edit === true ? <Field name="amount" component={renderInput} type="text"/> : extraPayment.amount}</td>
     <td>{extraPayment.type}</td>
     <td >
@@ -57,6 +58,7 @@ const ExtraPaymentList = ({extraPayments, extraPaymentActions, handleSubmit}) =>
     <thead>
     <tr>
       <th>Payment index</th>
+      <th>Payment date</th>
       <th>Payment</th>
       <th>Type</th>
       <th/>

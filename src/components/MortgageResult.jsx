@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Table} from 'react-bootstrap';
-import installmentDetails from './InstallmentDetails';
+import InstallmentDetails from './InstallmentDetails';
 
 
 export default class MortgageResult extends Component {
@@ -27,7 +27,7 @@ export default class MortgageResult extends Component {
                     </tbody>
                 </Table>
 
-                {installmentDetails(installments)}
+                <InstallmentDetails installments={installments}/>
 
             </div>
         )

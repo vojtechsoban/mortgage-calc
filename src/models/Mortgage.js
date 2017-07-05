@@ -8,8 +8,9 @@ export class Mortgage {
      * @param {number} principal
      * @param {Array} parameters
      * @param {Array} extraPayments
+     * @param {Number} start timestamp
      */
-    constructor(principal, parameters, extraPayments=[]) {
+    constructor(principal, parameters, extraPayments=[], start) {
         assert.isNotNull(principal);
         this.principal = principal;
 
@@ -23,8 +24,8 @@ export class Mortgage {
         }
         this.installmentSum = 0;
         this.installmentCount = 0;
-
         this.extraPayments = extraPayments;
+        this.start = start;
     }
 }
 

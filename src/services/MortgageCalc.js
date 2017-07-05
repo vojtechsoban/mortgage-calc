@@ -1,6 +1,7 @@
 import assert from 'assert';
 import {MONTHS_IN_YEAR} from '../constants/Constants';
 import {InstallmentSum,MortgageParameters} from '../models/Mortgage';
+import moment from 'moment';
 
 export const monthlyPayment = (principal, rate, payment = null) => {
 
@@ -125,6 +126,7 @@ export const calculate = (mortgageIn) => {
 
         mortgage.installments.push({
             type: 'regular',
+            date: moment(mortgageIn.start).add(count + 1, 'M').format('D.M.Y'),
             principalPart,
             count,
             installmentPart,

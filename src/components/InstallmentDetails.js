@@ -1,11 +1,12 @@
 import React from 'react';
 import {Table} from 'react-bootstrap';
 
-export default (installments) => {
+export default ({installments}) => {
     return (<Table striped bordered condensed hover>
         <thead>
         <tr>
-            <th>index</th>
+            <th>order</th>
+            <th>date</th>
             <th>monthly payment</th>
             <th>rate</th>
             <th>principal</th>
@@ -17,7 +18,8 @@ export default (installments) => {
         {installments.map((item, id) => {
             return (
                 <tr key={id}>
-                    <td>{item.count}</td>
+                    <td>{item.count +1 }</td>
+                    <td>{item.date}</td>
                     <td>{item.payment ? item.payment.toFixed(0) : null}</td>
                     <td>{item.rate ? (item.rate * 100).toFixed(2) : null}</td>
                     <td>{item.principalPart ? item.principalPart.toFixed(0) : null}</td>
