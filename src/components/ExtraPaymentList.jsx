@@ -1,33 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {reduxForm, Field} from 'redux-form';
-import {Button} from 'react-bootstrap';
+import {reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {EditExtraPayment, RemoveExtraPayment, CancelExtraPaymentEdit} from '../actions/Actions';
 import {Table} from 'react-bootstrap';
-import {renderInput, renderRadio} from "../services/Utils";
-
-const ExtraPayment = ({extraPayment, extraPaymentActions}) => (
-  <tr onClick={() => {
-    extraPaymentActions.onClickHandler(extraPayment.paymentIndex)
-  }}>
-    <td>{extraPayment.paymentIndex}</td>
-    <td>{extraPayment.date}</td>
-    <td>{extraPayment.edit === true ? <Field name="amount" component={renderInput} type="text"/> : extraPayment.amount}</td>
-    <td>{extraPayment.type}</td>
-    <td >
-      {extraPayment.edit && <Button type="submit">OK</Button>}
-      {extraPayment.edit && <Button onClick={(e) => {
-        e.stopPropagation();
-        extraPaymentActions.cancelExtraPaymentEdit(extraPayment.paymentIndex)
-      }}>Cancel</Button>}
-      <Button onClick={(e) => {
-        e.stopPropagation();
-        extraPaymentActions.removeExtraPayment(extraPayment.paymentIndex)
-      }}>Delete</Button>
-    </td>
-  </tr>
-);
+import ExtraPayment from './ExtraPayment';
 
 const mapStateToProps = state => {
   return {initialValues: state.calculateMortgageReducer.editingExtraPayment}
@@ -35,26 +12,24 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    extraPaymentActions: {
-      onClickHandler: (paymentIndex) => {
-        dispatch(EditExtraPayment(paymentIndex))
-      },
-      removeExtraPayment: (paymentIndex) => {
-        dispatch(RemoveExtraPayment(paymentIndex))
-      },
-      cancelExtraPaymentEdit: (paymentIndex) => {
-        dispatch(CancelExtraPaymentEdit(paymentIndex))
-      }
+    onClickHandler: (paymentIndex) => {
+      dispatch(EditExtraPayment(paymentIndex))
+    },
+    removeExtraPayment: (paymentIndex) => {
+      dispatch(RemoveExtraPayment(paymentIndex))
+    },
+    cancelExtraPaymentEdit: (paymentIndex) => {
+      dispatch(CancelExtraPaymentEdit(paymentIndex))
     }
   }
 };
 
-const ExtraPaymentList = ({extraPayments, extraPaymentActions, handleSubmit}) => {
-  
+const ExtraPaymentList = ({extraPayments, onClickHandler, cancelExtraPaymentEdit, removeExtraPayment, handleSubmit}) => {
+
   if (!extraPayments || extraPayments.length === 0) {
     return null;
   }
-  
+
   return (<form onSubmit={handleSubmit}><Table striped bordered condensed hover>
     <thead>
     <tr>
@@ -70,11 +45,18 @@ const ExtraPaymentList = ({extraPayments, extraPaymentActions, handleSubmit}) =>
       <ExtraPayment
         key={extraPayment.paymentIndex}
         extraPayment={extraPayment}
-        extraPaymentActions={extraPaymentActions}
+        onClickHandler={onClickHandler}
+        cancelExtraPaymentEdit={cancelExtraPaymentEdit}
+        removeExtraPayment={removeExtraPayment}
       />
     )}
     </tbody>
   </Table></form>);
+};
+
+ExtraPaymentList.propTypes = {
+  extraPayments: PropTypes.array.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
