@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import {
   Grid, Row, Col, ControlLabel, FormGroup, Button, RadioGroup, HelpBlock, OverlayTrigger, Tooltip
 } from 'react-bootstrap';
 import {reduxForm, Field} from "redux-form";
 import {connect} from "react-redux";
-import {renderInput, renderRadio} from "../services/Utils";
-import DateTimeField from 'react-bootstrap-datetimepicker';
+import {renderDateTime, renderInput, renderRadio} from "../services/Utils";
+
 const tooltip = text => (<Tooltip placement="top" id="tooltip">
   {text}
 </Tooltip>);
@@ -14,7 +15,9 @@ const tooltip = text => (<Tooltip placement="top" id="tooltip">
 class ExtraPaymentInputForm extends Component {
   render() {
 
-    const {handleSubmit} = this.props;
+    const {handleSubmit, initialValues: {date}} = this.props;
+
+    const paymentDate = moment(date).format('D.M.YYYY');
 
     return (<form onSubmit={handleSubmit}>
         <Grid>
@@ -22,6 +25,12 @@ class ExtraPaymentInputForm extends Component {
             <Col xs={2} md={2}>
               <ControlLabel>Payment index</ControlLabel>
               <Field name="paymentIndex" component={renderInput} type="text"/>
+            </Col>
+            <Col xs={2} md={2}>
+              <FormGroup>
+                <ControlLabel>Payment date</ControlLabel>
+                <Field name="date" component={renderDateTime} />
+              </FormGroup>
             </Col>
             <Col xs={2} md={2}>
               <ControlLabel>Amount</ControlLabel>

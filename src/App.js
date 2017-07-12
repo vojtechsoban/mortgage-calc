@@ -20,7 +20,7 @@ export default class App extends Component {
   
   onClicksubmitFormon = () => {
     this.refs.mortgageForm.getWrappedInstance().submit()
-  }
+  };
   
   render() {
     return (

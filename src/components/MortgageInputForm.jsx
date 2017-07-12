@@ -11,8 +11,8 @@ class MortgageInputForm extends Component {
   
   render() {
     
-    const {handleSubmit} = this.props;
-    
+    const {handleSubmit, initialValues: {start}} = this.props;
+
     return (<form onSubmit={handleSubmit}>
         <Grid>
           <Row>
@@ -40,9 +40,9 @@ class MortgageInputForm extends Component {
               <FormGroup>
                 <ControlLabel>Mortgage start</ControlLabel>
                 <DateTimeField
-                  dateTime={new Date().getTime()}
+                  dateTime={start}
                   mode='date' inputFormat='D.M.YYYY'
-                  onChange={start => {this.props.dispatch(updateMortgageStart(start));}}
+                  onChange={start => /*TODO dispatchToProps*/ {this.props.dispatch(updateMortgageStart(start));}}
                 />
               </FormGroup>
             </Col>

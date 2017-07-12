@@ -20,7 +20,7 @@ export default (state = null, action) => {
       return result;
     
     case actionTypes.ADD_EXTRA_PAYMENT:
-      
+
       const extraPaymentToAdd = new ExtraPayment(action.formData.paymentIndex, action.formData.amount, action.formData.type);
       extraPaymentToAdd.date = moment(state.start).add(parseInt(action.formData.paymentIndex) + 1, 'M').format('D.M.Y');
 
@@ -33,9 +33,12 @@ export default (state = null, action) => {
           return result;
         }
       }
-      
+
       result.extraPayments = [...result.extraPayments, extraPaymentToAdd];
-      
+
+      result.initialValues.extraPayments.paymentIndex += 12;
+      result.initialValues.extraPayments.date = moment(result.initialValues.extraPayments.date).add(12, 'M').valueOf();
+
       return result;
 
     case actionTypes.UPDATE_MORTGAGE_START:
@@ -43,24 +46,28 @@ export default (state = null, action) => {
       result.start = action.start;
 
       result.extraPayments = result.extraPayments.map(extraPayment => {
-        const exout = Object.assign({}, extraPayment);
-        exout.date = moment(result.start).add(extraPayment.paymentIndex + 1, 'M').format('D.M.Y');
-        return exout;
+        const date = moment(result.start).add(extraPayment.paymentIndex + 1, 'M').format('D.M.Y');
+        return Object.assign({}, extraPayment, {date});
       });
 
       if (result.mortgage && result.mortgage.installments) {
         result.mortgage.installments = result.mortgage.installments.map(extraPayment => {
-          const exout = Object.assign({}, extraPayment);
-          exout.date = moment(result.start).add(extraPayment.count + 1, 'M').format('D.M.Y');
-          return exout;
+          const date = moment(result.start).add(extraPayment.count + 1, 'M').format('D.M.Y');
+          return Object.assign({}, extraPayment, {date});
         });
         result.mortgage = Object.assign({}, result.mortgage);
       }
 
+      result.initialValues.extraPayments.date = moment(result.start)
+        .add(result.initialValues.extraPayments.paymentIndex + 1, 'M')
+        .valueOf();
+      result.initialValues = Object.assign({}, result.initialValues);
+
       return result;
 
     case actionTypes.REMOVE_EXTRA_PAYMENT:
-      result.extraPayments = state.extraPayments.filter(extraPayment => extraPayment.paymentIndex !== action.paymentIndex);
+      result.extraPayments = state.extraPayments
+        .filter(extraPayment => extraPayment.paymentIndex !== action.paymentIndex);
       return result;
     
     case actionTypes.EDIT_EXTRA_PAYMENT:

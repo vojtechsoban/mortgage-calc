@@ -34,3 +34,8 @@ export const updateMortgageStart = start => ({
   type: actionTypes.UPDATE_MORTGAGE_START,
   start: parseInt(start)
 });
+
+export const updateExtraPaymentDate = date => ({
+  type: actionTypes.UPDATE_EXTRA_PAYMENT_DATE,
+  date: parseInt(date)
+});
