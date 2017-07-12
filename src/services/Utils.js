@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {FormControl, Radio, Tooltip} from 'react-bootstrap';
+import React from 'react';
+import {FormControl, Radio} from 'react-bootstrap';
 import DateTimeField from 'react-bootstrap-datetimepicker';
 
 export const renderDateTime = field => (
@@ -8,13 +8,15 @@ export const renderDateTime = field => (
     mode='date' inputFormat='D.M.YYYY'
     {...field.input}
     type={field.type}
-    title={field.title} />
+    title={field.title}/>
 );
 
-
 export const renderInput = field => {
- return (<FormControl {...field.input} type={field.type} title={field.title}>
- </FormControl>);
+  return (<FormControl {...field.input} type={field.type} title={field.title}>
+  </FormControl>);
 };
 
-export const renderRadio = (text) => (field => (<Radio inline {...field.input}>{text}</Radio>));
+/* eslint-disable react/display-name */
+export const renderRadio = text => field => (
+  <Radio inline {...field.input}>{text}</Radio>
+);

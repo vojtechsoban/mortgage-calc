@@ -6,7 +6,7 @@ const InstallmentDetails = ({installments, monthlyPaymentsHidden}) => {
   return (<Table striped bordered condensed hover>
     <thead>
     <tr>
-      <th>order {monthlyPaymentsHidden}</th>
+      <th>order</th>
       <th>date</th>
       <th>monthly payment</th>
       <th>rate</th>

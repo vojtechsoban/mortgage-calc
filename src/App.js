@@ -2,7 +2,7 @@
 import './app.css';
 
 import React, {Component} from 'react';
-import {Grid, Row, Col, FormGroup, Button, Checkbox} from 'react-bootstrap';
+import {Grid, Row, Col, FormGroup, Button} from 'react-bootstrap';
 import MortgageInputForm from './components/MortgageInputForm';
 import ExtraPaymentsContainer from './containers/ExtraPaymentsContainer';
 import MortgageResultFormContainer from './containers/MortgageResultContainer';

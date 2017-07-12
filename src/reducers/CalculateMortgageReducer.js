@@ -3,14 +3,12 @@ import {Mortgage, MortgageParameters, ExtraPayment} from '../models/Mortgage';
 import * as actionTypes from '../constants/ActionTypes';
 import moment from 'moment';
 
-// The reducer is called during some initialization before the initial state is assigned.
-// Even if we use initial state in createStore we need to use default argument and assing null
 export default (state = null, action) => {
   
   const result = Object.assign({}, state);
   
   switch (action.type) {
-    case actionTypes.CALCULATE_MORTGAGE:
+    case actionTypes.CALCULATE_MORTGAGE: {
 
       const parameters = new MortgageParameters(
         0,
@@ -18,8 +16,9 @@ export default (state = null, action) => {
 
       result.mortgage = calculate(new Mortgage(parseFloat(action.formData.principal), [parameters], state.extraPayments, state.start));
       return result;
-    
-    case actionTypes.ADD_EXTRA_PAYMENT:
+    }
+
+    case actionTypes.ADD_EXTRA_PAYMENT: {
 
       const extraPaymentToAdd = new ExtraPayment(action.formData.paymentIndex, action.formData.amount, action.formData.type);
       extraPaymentToAdd.date = moment(state.start).add(parseInt(action.formData.paymentIndex) + 1, 'M').format('D.M.Y');
@@ -40,8 +39,9 @@ export default (state = null, action) => {
       result.initialValues.extraPayments.date = moment(result.initialValues.extraPayments.date).add(12, 'M').valueOf();
 
       return result;
+    }
 
-    case actionTypes.UPDATE_MORTGAGE_START:
+    case actionTypes.UPDATE_MORTGAGE_START: {
 
       result.start = action.start;
 
@@ -64,13 +64,15 @@ export default (state = null, action) => {
       result.initialValues = Object.assign({}, result.initialValues);
 
       return result;
+    }
 
-    case actionTypes.REMOVE_EXTRA_PAYMENT:
+    case actionTypes.REMOVE_EXTRA_PAYMENT: {
       result.extraPayments = state.extraPayments
         .filter(extraPayment => extraPayment.paymentIndex !== action.paymentIndex);
       return result;
-    
-    case actionTypes.EDIT_EXTRA_PAYMENT:
+    }
+
+    case actionTypes.EDIT_EXTRA_PAYMENT: {
       result.extraPayments = result.extraPayments.map(extraPayment => {
         const copy = Object.assign({}, extraPayment);
         copy.edit = extraPayment.paymentIndex === action.paymentIndex;
@@ -78,19 +80,21 @@ export default (state = null, action) => {
       });
       result.editingExtraPayment = state.extraPayments.find(extraPayment => extraPayment.paymentIndex === action.paymentIndex);
       return result;
-    
-    case actionTypes.CANCEL_EXTRA_PAYMENT_EDIT:
+    }
+
+    case actionTypes.CANCEL_EXTRA_PAYMENT_EDIT: {
       result.extraPayments = result.extraPayments.map(extraPayment => {
         const copy = Object.assign({}, extraPayment);
         copy.edit = false;
         return copy;
       });
       return result;
-    
-    case actionTypes.SAVE_EXTRA_PAYMENT:
-     
+    }
+
+    case actionTypes.SAVE_EXTRA_PAYMENT: {
+
       const paymentIndex = state.editingExtraPayment.paymentIndex;
-     
+
       result.extraPayments = result.extraPayments.map(extraPayment => {
         if (extraPayment.paymentIndex === paymentIndex) {
           const copy = Object.assign({}, state.editingExtraPayment);
@@ -103,15 +107,17 @@ export default (state = null, action) => {
           return copy;
         }
       });
-      
-      result.editingExtraPayment = null;
-      
-      return result;
 
-    case actionTypes.HIDE_MONTHLY_PAYMENT_CHAGE:
-      result.monthlyPaymentsHidden = ! state.monthlyPaymentsHidden;
+      result.editingExtraPayment = null;
+
       return result;
-    
+    }
+
+    case actionTypes.HIDE_MONTHLY_PAYMENT_CHAGE: {
+      result.monthlyPaymentsHidden = !state.monthlyPaymentsHidden;
+      return result;
+    }
+
     default:
       return state;
   }
