@@ -39,3 +39,8 @@ export const updateExtraPaymentDate = date => ({
   type: actionTypes.UPDATE_EXTRA_PAYMENT_DATE,
   date: parseInt(date)
 });
+
+export const hideMonthlyPaymentChange = () => ({
+  type: actionTypes.HIDE_MONTHLY_PAYMENT_CHAGE
+});
+

@@ -2,11 +2,12 @@
 import './app.css';
 
 import React, {Component} from 'react';
-import {Grid, Row, Col, FormGroup, Button} from 'react-bootstrap';
+import {Grid, Row, Col, FormGroup, Button, Checkbox} from 'react-bootstrap';
 import MortgageInputForm from './components/MortgageInputForm';
 import ExtraPaymentsContainer from './containers/ExtraPaymentsContainer';
 import MortgageResultFormContainer from './containers/MortgageResultContainer';
 import ExtraPaymentInputForm from './components/ExtraPaymentInputForm'
+import HideMonthlyPaymentCheckbox from './containers/HideMonthlyPaymentsCheckbox';
 import {AddExtraPaymentAction, CalculateMortgageAction, SaveExtraPayment} from './actions/Actions';
 
 // If you use React Router, make this component
@@ -36,7 +37,12 @@ export default class App extends Component {
           } }/>
         </Row>
         <Row>
-          <Col xs={8} xsOffset={8} md={4}>
+          <Col xs={8} md={4}>
+            <FormGroup>
+              <HideMonthlyPaymentCheckbox />
+            </FormGroup>
+          </Col>
+          <Col xs={8} xsOffset={6} mdOffset={4} md={4}>
             <FormGroup>
               <Button type="submit" onClick={this.onClicksubmitFormon}>Calculate</Button>
             </FormGroup>
@@ -48,7 +54,9 @@ export default class App extends Component {
           </Col>
         </Row>
         <Row>
+          <Col xs={4} md={6}>
           <MortgageResultFormContainer />
+          </Col>
         </Row>
       </Grid>
     );

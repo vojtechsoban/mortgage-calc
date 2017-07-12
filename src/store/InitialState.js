@@ -10,6 +10,7 @@ export const initialState = {
         editingExtraPayment: null,
         extraPayments: [],
         start,
+        monthlyPaymentsHidden: true,
         initialValues: {
             mortgage: {
                 principal: 2000000,

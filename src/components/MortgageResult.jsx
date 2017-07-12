@@ -10,7 +10,7 @@ export default class MortgageResult extends Component {
             return null;
         }
 
-        const {installmentCount, installmentSum, installments} = this.props.mortgage;
+        const {monthlyPaymentsHidden, mortgage: {installmentCount, installmentSum, installments}} = this.props;
 
         return (
             <div>
@@ -27,7 +27,7 @@ export default class MortgageResult extends Component {
                     </tbody>
                 </Table>
 
-                <InstallmentDetails installments={installments}/>
+                <InstallmentDetails installments={installments} monthlyPaymentsHidden={monthlyPaymentsHidden}/>
 
             </div>
         )

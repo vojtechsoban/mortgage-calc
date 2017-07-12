@@ -107,6 +107,10 @@ export default (state = null, action) => {
       result.editingExtraPayment = null;
       
       return result;
+
+    case actionTypes.HIDE_MONTHLY_PAYMENT_CHAGE:
+      result.monthlyPaymentsHidden = ! state.monthlyPaymentsHidden;
+      return result;
     
     default:
       return state;
