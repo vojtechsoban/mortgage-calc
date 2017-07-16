@@ -1,8 +1,9 @@
+import 'jsdom-global/register';
 import React from 'react';
 import {assert, expect} from 'chai'
 import {shallow, mount, render} from 'enzyme';
 
-import InstallmentDetails from '../../src/components/InstallmentDetails';
+import PaymentSchedule from '../../src/components/paymentschedule/PaymentSchedule';
 
 const extracted = bodyRows => bodyRows.at(1).find('td').map(node => node.text());
 
@@ -19,7 +20,7 @@ const getInstallmentDetailsWrapper = () => {
     rate: 0.01
   }];
 
-  return shallow(<InstallmentDetails installments={installments}/>);
+  return shallow(<PaymentSchedule installments={installments}/>);
 };
 
 describe('Component <InstallmentDetails />', () => {
@@ -38,7 +39,7 @@ describe('Component <InstallmentDetails />', () => {
 
   it('should have regular installment', () => {
 
-    const wrapper = shallow(<InstallmentDetails installments={[{
+    const wrapper = mount(<PaymentSchedule installments={[{
       count: 0,
       type: 'regular',
       date: 'date',
@@ -51,12 +52,12 @@ describe('Component <InstallmentDetails />', () => {
     const bodyRows = wrapper.find('tr');
     expect(bodyRows).to.have.length(2); // header + one row
     const installmentColumnContents = bodyRows.at(1).find('td').map(node => node.text());
-    expect(installmentColumnContents).to.be.deep.equal(['1', 'date', '123', '1.00', '234', '568', 'regular']);
+    expect(installmentColumnContents).to.be.deep.equal(['1', 'date', '123', '1.00', '234', '568', 'Regular payment']);
   });
 
   it('should have extra payment', () => {
 
-    const wrapper = shallow(<InstallmentDetails installments={[{
+    const wrapper = mount(<PaymentSchedule installments={[{
       count: 11,
       type: 'extra',
       payment: 1000
@@ -66,12 +67,12 @@ describe('Component <InstallmentDetails />', () => {
     expect(bodyRows).to.have.length(2); // header + one row
 
     const installmentColumnContents = extracted(bodyRows);
-    expect(installmentColumnContents).to.be.deep.equal(['12', '', '1000', '', '', '', 'extra']);
+    expect(installmentColumnContents).to.be.deep.equal(['', '', '1000', '', '1000', '0', 'Extra payment']);
   });
 
   it('should have annual summary', () => {
 
-    const wrapper = shallow(<InstallmentDetails installments={[{
+    const wrapper = mount(<PaymentSchedule installments={[{
       type: 'annual',
       installmentPart: 100,
       principalPart: 200
@@ -80,6 +81,6 @@ describe('Component <InstallmentDetails />', () => {
     const bodyRows = wrapper.find('tr');
     expect(bodyRows).to.have.length(2); // header + one row
     const installmentColumnContents = bodyRows.at(1).find('td').map(node => node.text());
-    expect(installmentColumnContents).to.be.deep.equal(['', '', '', '', '200', '100', 'annual']);
+    expect(installmentColumnContents).to.be.deep.equal(['', '', 'Annual summary', '200', '100', '']);
   });
 });

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Table} from 'react-bootstrap';
-import InstallmentDetails from './InstallmentDetails';
+import PaymentSchedule from './paymentschedule/PaymentSchedule';
 
 
 export default class MortgageResult extends Component {
@@ -27,7 +27,7 @@ export default class MortgageResult extends Component {
                     </tbody>
                 </Table>
 
-                <InstallmentDetails installments={installments} monthlyPaymentsHidden={monthlyPaymentsHidden}/>
+                <PaymentSchedule installments={installments} monthlyPaymentsHidden={monthlyPaymentsHidden}/>
 
             </div>
         )
