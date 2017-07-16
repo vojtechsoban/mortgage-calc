@@ -92,11 +92,14 @@ module.exports = Object.assign({}, defaultConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
-      title: 'Custom template using Handlebars',
+      title: 'Mortgage calculator',
       template: 'src/index.hbs'
     }),
     new webpack.DefinePlugin({
-      __DEVELOPMENT__: JSON.stringify(true)
+      __DEVELOPMENT__: JSON.stringify(true),
+      'process.env': {
+        'NODE_ENV': JSON.stringify('development')
+      }
     })
   ]
 });
