@@ -54,7 +54,7 @@ export default class App extends Component {
           </Col>
         </Row>
         <Row>
-          <Col xs={4} md={6}>
+          <Col xs={4} md={8}>
           <MortgageResultFormContainer />
           </Col>
         </Row>
