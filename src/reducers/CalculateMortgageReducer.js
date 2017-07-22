@@ -20,8 +20,8 @@ export default (state = null, action) => {
 
     case actionTypes.ADD_EXTRA_PAYMENT: {
 
-      const extraPaymentToAdd = new ExtraPayment(action.formData.paymentIndex, action.formData.amount, action.formData.type);
-      extraPaymentToAdd.date = moment(state.start).add(parseInt(action.formData.paymentIndex) + 1, 'M').format('D.M.Y');
+      const extraPaymentToAdd = new ExtraPayment(parseInt(action.formData.paymentIndex) - 1, action.formData.amount, action.formData.type);
+      extraPaymentToAdd.date = moment(state.start).add(parseInt(action.formData.paymentIndex), 'M').format('D.M.Y');
 
       // check whether edit existing extra payment or add a new one
       for (let i = 0; i < result.extraPayments.length; i++) {

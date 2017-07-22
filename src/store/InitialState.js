@@ -19,7 +19,7 @@ export const initialState = {
                 start,
             },
             extraPayments: {
-                paymentIndex: 11,
+                paymentIndex: 12,
                 type: 'constant_duration',
                 date: moment(start).add(12, 'M').valueOf(),
                 amount: 0.1
