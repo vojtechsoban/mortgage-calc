@@ -17,7 +17,6 @@ describe('MortgageCalcReducer', () => {
         // TODO share initialState between tests and app
         const start = moment('2016-07-03').unix() * 1000;
         const initialState = {mortgage: null, extraPayments: [], start};
-        console.log(`initial state start=${initialState.start}`);
         const formData = {principal: 10000, rate: 1.5, monthlyPayment: 6000};
 
         const expected = {
