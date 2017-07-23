@@ -6,7 +6,7 @@
     "start": "cross-env NODE_ENV=dev webpack-dev-server --config webpack.config.dev.js",
     "dist": "BABEL_ENV=prod webpack --config webpack.config.prod.js --progress -p",
     "lint": "eslint src",
-    "test": "BABEL_ENV=test mocha --compilers js:babel-register --recursive --require ./test/setup.js",
+    "test": "BABEL_ENV=test mocha ./src/**/*.spec.js ./test/**/*.spec.js --compilers js:babel-register --recursive --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
