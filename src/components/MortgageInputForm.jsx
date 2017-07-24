@@ -11,7 +11,7 @@ class MortgageInputForm extends Component {
   
   render() {
     
-    const {handleSubmit, initialValues: {start}} = this.props;
+    const {handleSubmit, updateMortgageStart, initialValues: {start}} = this.props;
 
     return (<form onSubmit={handleSubmit}>
         <Grid>
@@ -42,7 +42,8 @@ class MortgageInputForm extends Component {
                 <DateTimeField
                   dateTime={start}
                   mode='date' inputFormat='D.M.YYYY'
-                  onChange={start => /*TODO dispatchToProps*/ {this.props.dispatch(updateMortgageStart(start));}}
+                  onChange={start => updateMortgageStart(parseInt(start))}
+                  parse={parseInt}
                 />
               </FormGroup>
             </Col>
@@ -61,7 +62,8 @@ class MortgageInputForm extends Component {
 }
 
 MortgageInputForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  updateMortgageStart: PropTypes.func.isRequired
 };
 
 let decoratedForm = reduxForm({
@@ -72,7 +74,7 @@ let decoratedForm = reduxForm({
 decoratedForm = connect(state => ({
     initialValues: state.calculateMortgageReducer.initialValues.mortgage
   }),
-  dispatch => ({dispatch}),
+  dispatch => ({updateMortgageStart: start => dispatch(updateMortgageStart(parseInt(start)))}),
   null,
   {withRef: true}
 )(decoratedForm);
