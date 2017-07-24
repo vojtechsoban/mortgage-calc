@@ -1,5 +1,5 @@
 import React from 'react';
-import chai, {assert, expect} from 'chai'
+import chai, {expect} from 'chai'
 import chaiEnzyme from 'chai-enzyme';
 import {shallow} from 'enzyme';
 import ExtraPayment from '../ExtraPayment';

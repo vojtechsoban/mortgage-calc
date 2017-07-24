@@ -1,7 +1,7 @@
 import 'jsdom-global/register'; // for Enzyme mount - whithout this the following error will occur: TypeError: Cannot read property
                                 // 'addEventListener' of undefined
 import React from 'react';
-import chai, {assert, expect} from 'chai'
+import chai, {expect} from 'chai'
 import chaiEnzyme from 'chai-enzyme';
 import {shallow} from 'enzyme';
 import rewire from 'rewire';
