@@ -10,7 +10,7 @@ const ExtraPayment = ({extraPayment, onClickHandler, cancelExtraPaymentEdit, rem
   }}>
     <td>{extraPayment.paymentIndex + 1}</td>
     <td>{extraPayment.date}</td>
-    <td>{extraPayment.edit === true ? <Field name="amount" component={renderInput} type="text"/> : extraPayment.amount}</td>
+    <td>{extraPayment.edit === true ? <Field name="amount" component={renderInput} type="text" parse={parseFloat} /> : extraPayment.amount}</td>
     <td>{extraPayment.type}</td>
     <td >
       {extraPayment.edit && <Button type="submit">OK</Button>}

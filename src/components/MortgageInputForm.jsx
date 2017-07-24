@@ -19,13 +19,13 @@ class MortgageInputForm extends Component {
             <Col xs={8} md={4}>
               <FormGroup>
                 <ControlLabel>Principal</ControlLabel>
-                <Field name="principal" component={renderInput} type="text" className="form-control"/>
+                <Field name="principal" component={renderInput} type="text" className="form-control" parse={parseFloat} />
               </FormGroup>
             </Col>
             <Col xs={8} md={4}>
               <FormGroup>
                 <label>Rate</label>
-                <Field name="rate" component={renderInput} type="text" className="form-control"/>
+                <Field name="rate" component={renderInput} type="text" className="form-control" parse={parseFloat} />
               </FormGroup>
             </Col>
           </Row>
@@ -33,7 +33,7 @@ class MortgageInputForm extends Component {
             <Col xs={8} md={4}>
               <FormGroup>
                 <ControlLabel>Monthly payment</ControlLabel>
-                <Field name="monthlyPayment" component={renderInput} type="text" className="form-control"/>
+                <Field name="monthlyPayment" component={renderInput} type="text" className="form-control" parse={parseFloat} />
               </FormGroup>
             </Col>
             <Col xs={8} md={4}>

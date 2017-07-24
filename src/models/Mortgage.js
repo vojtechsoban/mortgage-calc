@@ -10,7 +10,7 @@ export class Mortgage {
      * @param {Array} extraPayments
      * @param {Number} start timestamp
      */
-    constructor(principal, parameters, extraPayments=[], start) {
+    constructor(principal, parameters, extraPayments=[], start = 0) {
         assert.isNotNull(principal);
         this.principal = principal;
 
@@ -75,8 +75,8 @@ export class ExtraPayment {
      * @param {string} type
      */
     constructor(paymentIndex, amount, type = 'default') {
-        this.paymentIndex = parseInt(paymentIndex);
-        this.amount = parseFloat(amount);
+        this.paymentIndex = paymentIndex;
+        this.amount = amount;
         this.type = type;
     }
 }
