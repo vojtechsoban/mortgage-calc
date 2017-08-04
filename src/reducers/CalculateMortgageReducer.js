@@ -1,12 +1,12 @@
-import {calculate} from '../services/MortgageCalc';
-import {Mortgage, MortgageParameters, ExtraPayment} from '../models/Mortgage';
-import * as actionTypes from '../constants/ActionTypes';
 import moment from 'moment';
+import * as actionTypes from '../constants/ActionTypes';
+import { ExtraPayment, Mortgage, MortgageParameters } from '../models/Mortgage';
+import { calculate } from '../services/MortgageCalc';
 
 export default (state = null, action) => {
-  
+
   const result = Object.assign({}, state);
-  
+
   switch (action.type) {
     case actionTypes.CALCULATE_MORTGAGE: {
 
@@ -35,8 +35,14 @@ export default (state = null, action) => {
 
       result.extraPayments = [...result.extraPayments, extraPaymentToAdd];
 
-      result.initialValues.extraPayments.paymentIndex += 12;
-      result.initialValues.extraPayments.date = moment(result.initialValues.extraPayments.date).add(12, 'M').valueOf();
+      result.initialValues.extraPayments = Object.assign(
+        {},
+        result.initialValues.extraPayments,
+        {
+          paymentIndex: result.initialValues.extraPayments.paymentIndex + 12,
+          date: moment(result.initialValues.extraPayments.date).add(12, 'M').valueOf(),
+          type: action.formData.type,
+        });
 
       return result;
     }
@@ -59,7 +65,7 @@ export default (state = null, action) => {
       }
 
       result.initialValues.extraPayments.date = moment(result.start)
-        .add(result.initialValues.extraPayments.paymentIndex + 1, 'M')
+        .add(result.initialValues.extraPayments.paymentIndex, 'M')
         .valueOf();
       result.initialValues = Object.assign({}, result.initialValues);
 

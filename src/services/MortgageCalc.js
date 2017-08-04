@@ -12,12 +12,12 @@ export const monthlyPayment = (principal, rate, payment = null) => {
         return {
             installmentPart: installment,
             principalPart
-        }
+        };
     } else {
         return {
             installmentPart: installment,
             principalPart: principal
-        }
+        };
     }
 };
 

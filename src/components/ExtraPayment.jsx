@@ -1,12 +1,12 @@
 import React from 'react';
 import {Field} from 'redux-form';
-import {renderInput} from "../services/Utils";
-import {Button} from 'react-bootstrap';
+import {renderInput} from '../services/Utils';
+import {Button} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
 const ExtraPayment = ({extraPayment, onClickHandler, cancelExtraPaymentEdit, removeExtraPayment}) => (
   <tr onClick={() => {
-    onClickHandler(extraPayment.paymentIndex)
+    onClickHandler(extraPayment.paymentIndex);
   }}>
     <td>{extraPayment.paymentIndex + 1}</td>
     <td>{extraPayment.date}</td>
@@ -16,11 +16,11 @@ const ExtraPayment = ({extraPayment, onClickHandler, cancelExtraPaymentEdit, rem
       {extraPayment.edit && <Button type="submit">OK</Button>}
       {extraPayment.edit && <Button onClick={(e) => {
         e.stopPropagation();
-        cancelExtraPaymentEdit(extraPayment.paymentIndex)
+        cancelExtraPaymentEdit(extraPayment.paymentIndex);
       }}>Cancel</Button>}
       <Button onClick={(e) => {
         e.stopPropagation();
-        removeExtraPayment(extraPayment.paymentIndex)
+        removeExtraPayment(extraPayment.paymentIndex);
       }}>Delete</Button>
     </td>
   </tr>

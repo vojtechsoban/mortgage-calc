@@ -1,63 +1,63 @@
-import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {FormGroup, ControlLabel, Button, Grid, Row, Col} from 'react-bootstrap';
-import DateTimeField from 'react-bootstrap-datetimepicker';
-import {connect} from 'react-redux';
-import {reduxForm, Field} from 'redux-form'
-import {renderInput} from '../services/Utils';
-import {updateMortgageStart} from '../actions/Actions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import { Button, Form } from 'semantic-ui-react';
+import { updateMortgageStart } from '../actions/Actions';
+import { renderDateTime, renderInput } from '../services/Utils';
 
 class MortgageInputForm extends Component {
-  
+
   render() {
-    
+
     const {handleSubmit, updateMortgageStart, initialValues: {start}} = this.props;
 
-    return (<form onSubmit={handleSubmit}>
-        <Grid>
-          <Row>
-            <Col xs={8} md={4}>
-              <FormGroup>
-                <ControlLabel>Principal</ControlLabel>
-                <Field name="principal" component={renderInput} type="text" className="form-control" parse={parseFloat} />
-              </FormGroup>
-            </Col>
-            <Col xs={8} md={4}>
-              <FormGroup>
-                <label>Rate</label>
-                <Field name="rate" component={renderInput} type="text" className="form-control" parse={parseFloat} />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={8} md={4}>
-              <FormGroup>
-                <ControlLabel>Monthly payment</ControlLabel>
-                <Field name="monthlyPayment" component={renderInput} type="text" className="form-control" parse={parseFloat} />
-              </FormGroup>
-            </Col>
-            <Col xs={8} md={4}>
-              <FormGroup>
-                <ControlLabel>Mortgage start</ControlLabel>
-                <DateTimeField
-                  dateTime={start}
-                  mode='date' inputFormat='D.M.YYYY'
-                  onChange={start => updateMortgageStart(parseInt(start))}
-                  parse={parseInt}
-                />
-              </FormGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={8} xsOffset={8} md={4}>
-              <FormGroup>
-                <Button type="submit">Calculate</Button>
-              </FormGroup>
-            </Col>
-          </Row>
-        </Grid>
-      </form>
-    )
+    return (<Form onSubmit={handleSubmit}>
+      <Form.Group widths='equal'>
+        <Form.Field>
+          <Form.Field>
+            <label>Principal</label>
+            <Field
+              name='principal'
+              component={renderInput}
+              type='text'
+              parse={parseFloat}
+            />
+          </Form.Field>
+        </Form.Field>
+        <Form.Field>
+          <label>Rate</label>
+          <Field
+            name='rate'
+            component={renderInput}
+            type='text'
+            parse={parseFloat}
+          />
+        </Form.Field>
+      </Form.Group>
+      <Form.Group widths='equal'>
+        <Form.Field>
+          <label>Monthly payment</label>
+          <Field
+            name='monthlyPayment'
+            component={renderInput}
+            type='text'
+            parse={parseFloat}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Mortgage start</label>
+          <Field
+            name='start'
+            value={start}
+            component={renderDateTime}
+            type='text'
+            onChange={(event, value) => updateMortgageStart(value.valueOf())}
+          />
+        </Form.Field>
+      </Form.Group>
+      <Button primary type='submit'>Calculate</Button>
+    </Form>);
   }
 }
 

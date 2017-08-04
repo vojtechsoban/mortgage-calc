@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Table} from 'react-bootstrap';
+import {Table} from 'semantic-ui-react';
 import RegularPayment from './RegularPayment';
 import ExtraPayment from './ExtraPayment';
 import AnnualSummary from './AnnualSummary';
@@ -26,7 +26,7 @@ const PaymentScheduleListMapper = monthlyPaymentsHidden => (item, id) => {
 };
 
 const PaymentSchedule = ({installments: paymentScheduleList, monthlyPaymentsHidden}) => {
-  return (<Table striped bordered condensed hover>
+  return (<Table>
     <thead>
     <tr>
       <th>order</th>

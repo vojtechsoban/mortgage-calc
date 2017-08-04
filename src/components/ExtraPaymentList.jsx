@@ -3,25 +3,25 @@ import PropTypes from 'prop-types';
 import {reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {EditExtraPayment, RemoveExtraPayment, CancelExtraPaymentEdit} from '../actions/Actions';
-import {Table} from 'react-bootstrap';
+import {Table} from 'semantic-ui-react';
 import ExtraPayment from './ExtraPayment';
 
 const mapStateToProps = state => {
-  return {initialValues: state.calculateMortgageReducer.editingExtraPayment}
+  return {initialValues: state.calculateMortgageReducer.editingExtraPayment};
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onClickHandler: (paymentIndex) => {
-      dispatch(EditExtraPayment(paymentIndex))
+      dispatch(EditExtraPayment(paymentIndex));
     },
     removeExtraPayment: (paymentIndex) => {
-      dispatch(RemoveExtraPayment(paymentIndex))
+      dispatch(RemoveExtraPayment(paymentIndex));
     },
     cancelExtraPaymentEdit: (paymentIndex) => {
-      dispatch(CancelExtraPaymentEdit(paymentIndex))
+      dispatch(CancelExtraPaymentEdit(paymentIndex));
     }
-  }
+  };
 };
 
 const ExtraPaymentList = ({extraPayments, onClickHandler, cancelExtraPaymentEdit, removeExtraPayment, handleSubmit}) => {
@@ -30,7 +30,7 @@ const ExtraPaymentList = ({extraPayments, onClickHandler, cancelExtraPaymentEdit
     return null;
   }
 
-  return (<form onSubmit={handleSubmit}><Table striped bordered condensed hover>
+  return (<form onSubmit={handleSubmit}><Table>
     <thead>
     <tr>
       <th>Payment index</th>

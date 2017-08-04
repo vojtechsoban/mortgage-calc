@@ -1,14 +1,13 @@
+import React, { Component } from 'react';
 // Import bundled CSS files globally
-import './app.css';
-
-import React, {Component} from 'react';
-import {Grid, Row, Col, FormGroup, Button} from 'react-bootstrap';
+import 'semantic-ui-css/semantic.min.css';
+import { Button, Container, Grid, Segment } from 'semantic-ui-react';
+import '../assets/css/react-datetime.css';
+import { AddExtraPaymentAction, CalculateMortgageAction, SaveExtraPayment } from './actions/Actions';
+import ExtraPaymentInputForm from './components/ExtraPaymentInputForm';
 import MortgageInputForm from './components/MortgageInputForm';
 import ExtraPaymentsContainer from './containers/ExtraPaymentsContainer';
 import MortgageResultFormContainer from './containers/MortgageResultContainer';
-import ExtraPaymentInputForm from './components/ExtraPaymentInputForm'
-import HideMonthlyPaymentCheckbox from './containers/HideMonthlyPaymentsCheckbox';
-import {AddExtraPaymentAction, CalculateMortgageAction, SaveExtraPayment} from './actions/Actions';
 
 // If you use React Router, make this component
 // render <Router> with your routes. Currently,
@@ -18,47 +17,43 @@ import {AddExtraPaymentAction, CalculateMortgageAction, SaveExtraPayment} from '
 // https://github.com/reactjs/react-router/issues/2182
 
 export default class App extends Component {
-  
+
   onClicksubmitFormon = () => {
-    this.refs.mortgageForm.getWrappedInstance().submit()
+    this.refs.mortgageForm.getWrappedInstance().submit();
   };
-  
+
   render() {
     return (
-      <Grid>
-        <Row>
-          <MortgageInputForm ref={'mortgageForm'} onSubmit={(formData, dispatch) => {
-            dispatch(CalculateMortgageAction(formData));
-          } }/>
-        </Row>
-        <Row>
-          <ExtraPaymentInputForm onSubmit={(formData, dispatch) => {
-            dispatch(AddExtraPaymentAction(formData));
-          } }/>
-        </Row>
-        <Row>
-          <Col xs={8} md={4}>
-            <FormGroup>
-              <HideMonthlyPaymentCheckbox />
-            </FormGroup>
-          </Col>
-          <Col xs={8} xsOffset={6} mdOffset={4} md={4}>
-            <FormGroup>
-              <Button type="submit" onClick={this.onClicksubmitFormon}>Calculate</Button>
-            </FormGroup>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={8} md={8}>
-            <ExtraPaymentsContainer onSubmit={(extraPayment, dispatch) => {dispatch(SaveExtraPayment(extraPayment));}}/>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={4} md={8}>
-          <MortgageResultFormContainer />
-          </Col>
-        </Row>
-      </Grid>
+      <Container>
+        <Segment.Group>
+          <Segment>
+            <MortgageInputForm ref={'mortgageForm'} onSubmit={(formData, dispatch) => {
+              dispatch(CalculateMortgageAction(formData));
+            }}/>
+          </Segment>
+          <Segment>
+            <ExtraPaymentInputForm onSubmit={(formData, dispatch) => {
+              dispatch(AddExtraPaymentAction(formData));
+            }}/>
+          </Segment>
+          <Segment>
+            <ExtraPaymentsContainer onSubmit={(extraPayment, dispatch) => {
+              dispatch(SaveExtraPayment(extraPayment));
+            }}/>
+          </Segment>
+          <Segment>
+            <Button primary type="submit" onClick={this.onClicksubmitFormon}>Calculate</Button>
+          </Segment>
+          <Segment>
+            <MortgageResultFormContainer/>
+          </Segment>
+        </Segment.Group>
+
+        <Grid.Row>
+          <Grid.Column>
+          </Grid.Column>
+        </Grid.Row>
+      </Container>
     );
   }
 }
