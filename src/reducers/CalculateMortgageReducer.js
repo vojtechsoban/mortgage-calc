@@ -12,16 +12,16 @@ export default (state = null, action) => {
 
       const parameters = new MortgageParameters(
         0,
-        action.formData.rate / 100, parseFloat(action.formData.monthlyPayment));
+        action.formData.rate / 100, action.formData.monthlyPayment);
 
-      result.mortgage = calculate(new Mortgage(parseFloat(action.formData.principal), [parameters], state.extraPayments, state.start));
+      result.mortgage = calculate(new Mortgage(action.formData.principal, [parameters], state.extraPayments, state.start));
       return result;
     }
 
     case actionTypes.ADD_EXTRA_PAYMENT: {
 
-      const extraPaymentToAdd = new ExtraPayment(parseInt(action.formData.paymentIndex) - 1, action.formData.amount, action.formData.type);
-      extraPaymentToAdd.date = moment(state.start).add(parseInt(action.formData.paymentIndex), 'M').format('D.M.Y');
+      const extraPaymentToAdd = new ExtraPayment(action.formData.paymentIndex - 1, action.formData.amount, action.formData.type);
+      extraPaymentToAdd.date = moment(state.start).add(action.formData.paymentIndex, 'M').format('D.M.Y');
 
       // check whether edit existing extra payment or add a new one
       for (let i = 0; i < result.extraPayments.length; i++) {

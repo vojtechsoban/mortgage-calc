@@ -32,12 +32,12 @@ export const EditExtraPayment = (paymentIndex) => {
 
 export const updateMortgageStart = start => ({
   type: actionTypes.UPDATE_MORTGAGE_START,
-  start: parseInt(start)
+  start: start
 });
 
 export const updateExtraPaymentDate = date => ({
   type: actionTypes.UPDATE_EXTRA_PAYMENT_DATE,
-  date: parseInt(date)
+  date: date
 });
 
 export const hideMonthlyPaymentChange = () => ({

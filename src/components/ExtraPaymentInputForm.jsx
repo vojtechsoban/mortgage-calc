@@ -24,12 +24,12 @@ class ExtraPaymentInputForm extends Component {
           <Row>
             <Col xs={2} md={2}>
               <ControlLabel>Payment index</ControlLabel>
-              <Field name="paymentIndex" component={renderInput} type="text"/>
+              <Field name="paymentIndex" component={renderInput} type="text" parse={parseInt} />
             </Col>
             <Col xs={2} md={2}>
               <FormGroup>
                 <ControlLabel>Payment date</ControlLabel>
-                <Field name="date" component={renderDateTime} />
+                <Field name="date" component={renderDateTime} parse={parseInt} />
               </FormGroup>
             </Col>
             <Col xs={2} md={2}>
@@ -37,7 +37,7 @@ class ExtraPaymentInputForm extends Component {
               <OverlayTrigger placement="top" overlay={tooltip(
                 'Extra payment amount. Could be absolute value or relative value as percentage of remaining balance.'
               )}><FormGroup>
-                <Field name="amount" component={renderInput} type="text"/>
+                <Field name="amount" component={renderInput} type="text" parse={parseFloat} />
               </FormGroup>
               </OverlayTrigger>
             </Col>

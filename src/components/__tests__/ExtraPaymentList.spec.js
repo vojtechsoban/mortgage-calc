@@ -1,6 +1,7 @@
-import 'jsdom-global/register'; // for Enzyme mount - whithout this the following error will occur: TypeError: Cannot read property 'addEventListener' of undefined
+import 'jsdom-global/register'; // for Enzyme mount - whithout this the following error will occur: TypeError: Cannot read property
+                                // 'addEventListener' of undefined
 import React from 'react';
-import chai, {assert, expect} from 'chai'
+import chai, {expect} from 'chai'
 import chaiEnzyme from 'chai-enzyme';
 import {shallow} from 'enzyme';
 import rewire from 'rewire';
@@ -9,7 +10,8 @@ chai.use(chaiEnzyme);
 
 const ExtraPaymentListModule = rewire('../ExtraPaymentList');
 const ExtraPaymentList = ExtraPaymentListModule.__get__('ExtraPaymentList');
-const dummyCallback = () => {};
+const dummyCallback = () => {
+};
 const defaultProps = {
   handleSubmit: dummyCallback,
   onClickHandler: dummyCallback,
@@ -33,7 +35,7 @@ describe('Component <ExtraPaymentList />', () => {
   });
   
   it('should have the header', () => {
-    const thead = shallow(<ExtraPaymentList extraPayments={[{}]}  {...defaultProps} />).find('thead tr');
+    const thead = shallow(<ExtraPaymentList extraPayments={[{}]} {...defaultProps} />).find('thead tr');
     expect(thead).to.have.length(1);
     const headers = thead.find('th');
     const headerDescriptions = new Array(5).fill().map((value, index) => headers.at(index).text());
@@ -42,7 +44,7 @@ describe('Component <ExtraPaymentList />', () => {
   });
   
   it('should have 3 ExtraPayment components for 3 extra payments', () => {
-    const extraPaymentList = shallow(<ExtraPaymentList extraPayments={[{}, {}, {}]}  {...defaultProps} />);
+    const extraPaymentList = shallow(<ExtraPaymentList extraPayments={[{}, {}, {}]} {...defaultProps} />);
     expect(extraPaymentList.find('ExtraPayment')).to.have.length(3);
   });
 });
