@@ -1,9 +1,9 @@
 import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Root from './containers/Root';
-import configureStore from './store/configureStore';
-import { initialState } from './store/InitialState';
+import Root from 'src/containers/Root';
+import configureStore from 'src/store/configureStore';
+import { initialState } from 'src/store/InitialState';
 
 const rootElement = document.getElementById('root');
 const store = configureStore(initialState);

@@ -6,7 +6,7 @@
     "start": "cross-env NODE_ENV=dev webpack-dev-server --config webpack.config.dev.js",
     "dist": "BABEL_ENV=prod webpack --config webpack.config.prod.js --progress -p",
     "lint": "eslint src",
-    "test": "BABEL_ENV=test mocha ./src/**/*.spec.js ./test/**/*.spec.js --compilers js:babel-register --recursive --require ./test/setup.js",
+    "test": "NODE_ENV=test BABEL_ENV=test mocha ./src/**/*.spec.js ./test/**/*.spec.js -r babel-register -r ./test/setup.js --recursive ",
     "test:watch": "npm test -- --watch"
   },
   "repository": {
@@ -28,6 +28,7 @@
   "license": "MIT",
   "homepage": "https://github.com/vojtechsoban/mortgage-calc",
   "devDependencies": {
+    "app-module-path": "^2.2.0",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
@@ -47,8 +48,8 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.29.0",
-    "jsdom": "^9.8.3",
-    "jsdom-global": "^2.1.0",
+    "jsdom": "^11.5.1",
+    "jsdom-global": "^3.0.2",
     "mocha": "^3.2.0",
     "react-addons-test-utils": "^15.4.1",
     "react-hot-loader": "^3.0.0-beta.7",

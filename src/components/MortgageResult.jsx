@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'semantic-ui-react';
-import PaymentSchedule from './paymentschedule/PaymentSchedule';
-import HideMonthlyPaymentCheckbox from '../containers/HideMonthlyPaymentsCheckbox';
+import PaymentSchedule from 'src/components/paymentschedule/PaymentSchedule';
+import HideMonthlyPaymentCheckbox from 'src/containers/HideMonthlyPaymentsCheckbox';
 
 export default class MortgageResult extends Component {
 

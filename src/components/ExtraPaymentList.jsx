@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
-import {EditExtraPayment, RemoveExtraPayment, CancelExtraPaymentEdit} from '../actions/Actions';
+import {EditExtraPayment, RemoveExtraPayment, CancelExtraPaymentEdit} from 'src/actions/Actions';
 import {Table} from 'semantic-ui-react';
-import ExtraPayment from './ExtraPayment';
+import ExtraPayment from 'src/components/ExtraPayment';
 
 const mapStateToProps = state => {
   return {initialValues: state.calculateMortgageReducer.editingExtraPayment};

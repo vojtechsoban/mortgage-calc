@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Table} from 'semantic-ui-react';
-import RegularPayment from './RegularPayment';
-import ExtraPayment from './ExtraPayment';
-import AnnualSummary from './AnnualSummary';
+import RegularPayment from 'src/components/paymentschedule/RegularPayment';
+import ExtraPayment from 'src/components/paymentschedule/ExtraPayment';
+import AnnualSummary from 'src/components/paymentschedule/AnnualSummary';
 
 /* eslint-disable react/display-name */
 const PaymentScheduleListMapper = monthlyPaymentsHidden => (item, id) => {

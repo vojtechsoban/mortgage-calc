@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Button, Form } from 'semantic-ui-react';
-import { updateMortgageStart } from '../actions/Actions';
-import { renderDateTime, renderInput } from '../services/Utils';
+import { updateMortgageStart } from 'src/actions/Actions';
+import { renderDateTime, renderInput } from 'src/services/Utils';
 
 class MortgageInputForm extends Component {
 

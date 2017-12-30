@@ -1,8 +1,8 @@
 import React from 'react';
 import {Field} from 'redux-form';
-import {renderInput} from '../services/Utils';
 import {Button} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import {renderInput} from 'src/services/Utils';
 
 const ExtraPayment = ({extraPayment, onClickHandler, cancelExtraPaymentEdit, removeExtraPayment}) => (
   <tr onClick={() => {
@@ -10,9 +10,13 @@ const ExtraPayment = ({extraPayment, onClickHandler, cancelExtraPaymentEdit, rem
   }}>
     <td>{extraPayment.paymentIndex + 1}</td>
     <td>{extraPayment.date}</td>
-    <td>{extraPayment.edit === true ? <Field name="amount" component={renderInput} type="text" parse={parseFloat} /> : extraPayment.amount}</td>
+    <td>
+      {extraPayment.edit === true
+        ? <Field name="amount" component={renderInput} type="text" parse={parseFloat}/>
+        : extraPayment.amount}
+    </td>
     <td>{extraPayment.type}</td>
-    <td >
+    <td>
       {extraPayment.edit && <Button type="submit">OK</Button>}
       {extraPayment.edit && <Button onClick={(e) => {
         e.stopPropagation();
@@ -28,7 +32,7 @@ const ExtraPayment = ({extraPayment, onClickHandler, cancelExtraPaymentEdit, rem
 
 ExtraPayment.propTypes = {
   extraPayment: PropTypes.object.isRequired,
-  onClickHandler : PropTypes.func.isRequired,
+  onClickHandler: PropTypes.func.isRequired,
   cancelExtraPaymentEdit: PropTypes.func.isRequired,
   removeExtraPayment: PropTypes.func.isRequired
 };

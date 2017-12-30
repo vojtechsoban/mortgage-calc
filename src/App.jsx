@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 // Import bundled CSS files globally
 import 'semantic-ui-css/semantic.min.css';
-import { Button, Container, Grid, Segment } from 'semantic-ui-react';
-import '../assets/css/react-datetime.css';
-import { AddExtraPaymentAction, CalculateMortgageAction, SaveExtraPayment } from './actions/Actions';
-import ExtraPaymentInputForm from './components/ExtraPaymentInputForm';
-import MortgageInputForm from './components/MortgageInputForm';
-import ExtraPaymentsContainer from './containers/ExtraPaymentsContainer';
-import MortgageResultFormContainer from './containers/MortgageResultContainer';
+import { Button, Container, Segment } from 'semantic-ui-react';
+import 'assets/css/react-datetime.css';
+import { AddExtraPaymentAction, CalculateMortgageAction, SaveExtraPayment } from 'src/actions/Actions';
+import ExtraPaymentInputForm from 'src/components/ExtraPaymentInputForm';
+import MortgageInputForm from 'src/components/MortgageInputForm';
+import ExtraPaymentsContainer from 'src/containers/ExtraPaymentsContainer';
+import MortgageResultFormContainer from 'src/containers/MortgageResultContainer';
 
 // If you use React Router, make this component
 // render <Router> with your routes. Currently,
@@ -48,11 +48,6 @@ export default class App extends Component {
             <MortgageResultFormContainer/>
           </Segment>
         </Segment.Group>
-
-        <Grid.Row>
-          <Grid.Column>
-          </Grid.Column>
-        </Grid.Row>
       </Container>
     );
   }

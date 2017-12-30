@@ -1,5 +1,5 @@
-import MortgageResult from '../components/MortgageResult';
 import {connect} from 'react-redux';
+import MortgageResult from 'src/components/MortgageResult';
 
 export default connect((state) => {
   return {

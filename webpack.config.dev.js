@@ -6,11 +6,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const defaultConfig = {
   resolve: {
     alias: {
-      // 'redux-devtools/lib': path.join(__dirname, '..', '..', 'src'),
-      // 'redux-devtools': path.join(__dirname, '..', '..', 'src'),
       'react': path.join(__dirname, 'node_modules', 'react')
     },
-    modules: [path.resolve('./src'), 'node_modules'],
+    modules: [path.resolve(__dirname), 'node_modules'],
     extensions: ['.js', '.jsx', '.css', '.scss']
   },
   output: {

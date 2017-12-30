@@ -1,7 +1,7 @@
 import { createStore, compose } from 'redux';
 import { persistState } from 'redux-devtools';
-import rootReducer from '../reducers';
-import DevTools from '../containers/DevTools';
+import rootReducer from 'src/reducers';
+import DevTools from 'src/containers/DevTools';
 
 const getDebugSessionKey = () => {
     // You can write custom logic here!

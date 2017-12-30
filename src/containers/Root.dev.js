@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
-import App from '../App';
-import DevTools from './DevTools';
+import App from 'src/App';
+import DevTools from 'src/containers/DevTools';
 
 export default class Root extends Component {
 

@@ -4,7 +4,6 @@ import DateTime from 'react-datetime';
 import { Input, Radio } from 'semantic-ui-react';
 
 export const renderDateTime = field => {
-  console.log('renderDateTime', field);
   // TODO customize appearance, add open calendar buton, edit date as text
   // https://github.com/YouCanBookMe/react-datetime#customize-the-input-appearance
   return (

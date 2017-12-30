@@ -1,7 +1,7 @@
 import moment from 'moment';
-import * as actionTypes from '../constants/ActionTypes';
-import { ExtraPayment, Mortgage, MortgageParameters } from '../models/Mortgage';
-import { calculate } from '../services/MortgageCalc';
+import * as actionTypes from 'src/constants/ActionTypes';
+import { ExtraPayment, Mortgage, MortgageParameters } from 'src/models/Mortgage';
+import { calculate } from 'src/services/MortgageCalc';
 
 export default (state = null, action) => {
 

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Checkbox } from 'semantic-ui-react';
-import { hideMonthlyPaymentChange } from '../actions/Actions';
+import { hideMonthlyPaymentChange } from 'src/actions/Actions';
 
 const HideMonthlyPaymentCheckbox = ({checked, onChange}) => (
   <Checkbox checked={checked} onChange={onChange} toggle label="Hide monthly payments"/>

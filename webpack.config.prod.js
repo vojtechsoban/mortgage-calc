@@ -8,7 +8,7 @@ const defaultConfig = {
     alias: {
       'react': path.join(__dirname, 'node_modules', 'react')
     },
-    modules: [path.resolve('./src'), 'node_modules'],
+    modules: [path.resolve(__dirname), 'node_modules'],
     extensions: ['.js', '.jsx', '.css', '.scss']
   },
   output: {
