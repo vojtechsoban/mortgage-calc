@@ -6,8 +6,27 @@
     "start": "cross-env NODE_ENV=dev webpack-dev-server --config webpack.config.dev.js",
     "dist": "BABEL_ENV=prod webpack --config webpack.config.prod.js --progress -p",
     "lint": "eslint src",
-    "test": "NODE_ENV=test BABEL_ENV=test mocha ./src/**/*.spec.js ./test/**/*.spec.js -r babel-register -r ./test/setup.js --recursive ",
+    "test": "NODE_ENV=test BABEL_ENV=test nyc mocha ./src/**/*.spec.js ./test/**/*.spec.js -r babel-register -r ./test/setup.js --recursive ",
     "test:watch": "npm test -- --watch"
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "tempDirectory": "./artifacts/coverage/.nyc_output",
+    "extension": [
+      ".jsx"
+    ],
+    "cache": true,
+    "all": true,
+    "report-dir": "./artifacts/coverage",
+    "exclude": [
+      "**/*.spec.js",
+      "dist",
+      "test/**"
+    ]
   },
   "repository": {
     "type": "git",
@@ -51,6 +70,7 @@
     "jsdom": "^11.5.1",
     "jsdom-global": "^3.0.2",
     "mocha": "^3.2.0",
+    "nyc": "^11.4.1",
     "react-addons-test-utils": "^15.4.1",
     "react-hot-loader": "^3.0.0-beta.7",
     "redux-devtools": "^3.3.1",

@@ -1,6 +1,7 @@
-node_modules
-npm-debug.log
-.DS_Store
-dist
-.idea
+/node_modules
+/artifacts
+/npm-debug.log
+/.DS_Store
+/dist
+/.idea
 *.iml
