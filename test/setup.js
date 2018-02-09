@@ -2,10 +2,10 @@ import 'jsdom-global/register'
 import { JSDOM } from 'jsdom'
 import path from 'path'
 import { addPath } from 'app-module-path'
-// import { configure } from 'enzyme'
-// import Adapter from 'enzyme-adapter-react-16'
+import { configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
 
-// configure({ disableLifecycleMethods: true, adapter: new Adapter() });
+configure({ disableLifecycleMethods: true, adapter: new Adapter() });
 
 const sourceDirname = path.resolve(__dirname, '..');
 addPath(sourceDirname);

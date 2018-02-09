@@ -11,11 +11,6 @@ const defaultConfig = {
     modules: [path.resolve(__dirname), 'node_modules'],
     extensions: ['.js', '.jsx', '.css', '.scss']
   },
-  output: {
-    path: path.resolve(__dirname, 'www/dist/'),
-    filename: 'bundle.js',
-    publicPath: '/dist/'
-  },
   module: {
     rules: [
       {
@@ -48,44 +43,44 @@ module.exports = Object.assign({}, defaultConfig, {
   devServer: {
     host: 'localhost',
     port: '3000',
-    
+
     // match the output path
     contentBase: path.resolve(__dirname, 'dist'),
-    
+
     hot: true,
     inline: true,
     historyApiFallback: true,
     publicPath: '/'
   },
-  
+
   output: {
     // the output bundle
     filename: 'bundle.js',
-    
+
     path: path.join(__dirname, 'dist'),
-    
+
     // necessary for HMR to know where to load the hot update chunks
     publicPath: '/'
   },
-  
+
   entry: [
     // activate HMR for React
     'react-hot-loader/patch',
-    
+
     // bundle the client for webpack-dev-server
     // and connect to the provided endpoint
     'webpack-dev-server/client?http://localhost:3000',
-    
+
     // bundle the client for hot reloading
     // only- means to only hot reload for successful updates
     'webpack/hot/only-dev-server',
-    
+
     // 'babel-polyfill',
-    
+
     // the entry point of our app
     './src/index'
   ],
-  
+
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('styles.css'),

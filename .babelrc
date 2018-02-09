@@ -17,7 +17,8 @@
     "test": {
       "plugins": [
         // Enables React code to work with HMR.
-        "react-hot-loader/babel"
+        "react-hot-loader/babel",
+        "babel-plugin-istanbul"
       ]
     }
   }

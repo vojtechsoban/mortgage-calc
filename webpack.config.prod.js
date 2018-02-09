@@ -11,11 +11,6 @@ const defaultConfig = {
     modules: [path.resolve(__dirname), 'node_modules'],
     extensions: ['.js', '.jsx', '.css', '.scss']
   },
-  output: {
-    path: path.resolve(__dirname, 'www/dist/'),
-    filename: 'bundle.js',
-    publicPath: '/dist/'
-  },
   module: {
     rules: [
       {
@@ -42,13 +37,12 @@ const defaultConfig = {
   }
 };
 
-//noinspection JSUnresolvedFunction
+  // noinspection JSUnresolvedFunction
   module.exports = Object.assign({}, defaultConfig, {
   devtool: 'cheap-module-source-map',
   output: {
-    // the output bundle
-    filename: 'bundle.js',
-    path: path.join(__dirname, 'dist')
+      filename: '[name].[chunkhash].js',
+      path: path.resolve(__dirname, 'dist'),
   },
   entry: [
     './src/index'
