@@ -48,8 +48,8 @@ export const pushMortgageParameters = (mortgage: Mortgage, paymentIndex: number,
 export const getRemainingPeriod = (mortgage, paymentIndex) => {
 
 
-  const remainder = (parameters, paymentIndex, paymentSum = 0) => {
-    const result = paymentSum + parameters.payments - paymentIndex - 1
+  const remainder = (parameters, paymentIndexInt, paymentSum = 0) => {
+    const result = paymentSum + parameters.payments - paymentIndexInt - 1
     // cover scenario when requesting remainder after period finished (and mortgage is not payed) and also for constant parameters
     return result > 0 ? result : 0
   }
@@ -95,7 +95,7 @@ export const getExtraPayment = (mortgage, paymentIndex) => {
  *
  * @param {Mortgage} mortgageIn
  */
-export const calculate = (mortgageIn) => {
+export function calculate(mortgageIn: Mortgage): Mortgage {
 
   const mortgage = Object.assign({}, mortgageIn)
   mortgage.installments = []

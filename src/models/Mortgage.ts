@@ -8,6 +8,7 @@ export class Mortgage {
   start: number
   parameters: Array<MortgageParameters>
   extraPayments: Array<ExtraPayment>
+  installments: Array<Installment> = []
 
     /**
      *
@@ -82,19 +83,61 @@ export class InstallmentSum {
  */
 export class ExtraPayment {
 
-  paymentIndex: number
-  amount: number
   type: string
+  paymentIndex: number = 0
+  amount: number = 0
+  date: string = ''
+  // count: number = 0
+  edit: boolean = false // FIXME field from state, not from mortgage
 
-    /**
-     * Extra payment constructor
-     * @param {number} paymentIndex
-     * @param {number} amount
-     * @param {string} type
-     */
+  /**
+   * Extra payment constructor
+   * @param {number} paymentIndex
+   * @param {number} amount
+   * @param {string} type
+   */
   constructor(paymentIndex, amount, type = 'default') {
     this.paymentIndex = paymentIndex
     this.amount = amount
     this.type = type
   }
 }
+
+export interface Installment {
+  type: string
+  count?: number
+  payment?: number
+  date?: string
+  principalPart?: number
+  installmentPart?: number
+  rate?: number
+}
+
+// export class Installment {
+//
+//   type: string
+//   count: number
+//   payment: number
+//   date?: string
+//   principalPart?: number
+//   installmentPart?: number
+//   rate?: number
+//
+//   constructor(
+//     type: string,
+//     count: number,
+//     payment: number,
+//     date?: string,
+//     principalPart?: number,
+//     installmentPart?: number,
+//     rate?: number,
+//   ) {
+//     this.type = type
+//     this.date = date
+//     this.principalPart = principalPart
+//     this.count = count
+//     this.installmentPart = installmentPart
+//     this.payment = payment
+//     this.rate = rate
+//   }
+// }

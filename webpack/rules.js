@@ -39,30 +39,6 @@ const devRules = () => (!isProduction ? [
       'sass-loader',
     ],
   },
-  {
-    oneOf: [
-      {
-        test: /\.module\.less$/,
-        use: [
-          'style-loader',
-          { loader: 'css-loader', options: { modules: true, localsConvention: 'camelCase' } },
-          {
-            loader: 'less-loader',
-          },
-        ],
-      },
-      {
-        test: /^((?!\.module).)*less$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          {
-            loader: 'less-loader',
-          },
-        ],
-      },
-    ],
-  },
 ] : [])
 
 

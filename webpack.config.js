@@ -45,10 +45,6 @@ module.exports = (env) => {
       ROOT_DIR,
       NODE_MODULES_DIR,
     ],
-    alias: {
-      // rewrite import of semantic config in node_modules to custom theme config
-      '../../theme.config$': path.join(ROOT_DIR, 'src/frontend/styles/semantic-ui/theme.config'),
-    },
   }
 
   // Webpack has some issues with building production source maps, so source-map is one of
